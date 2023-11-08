@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+   <children>
+      <ImageView fitHeight="94.0" fitWidth="229.0" layoutX="300.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Img/LogoGG.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="309.0" layoutY="243.0" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su usuario">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="309.0" layoutY="325.0" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su contraseña">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="422.0" layoutY="367.0" text="Olvide mi constraseña">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Button layoutX="193.0" layoutY="437.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="107.0" text="Iniciar sesion" />
+      <Button layoutX="529.0" layoutY="437.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="107.0" text="Registrarme" />
+   </children>
+</AnchorPane>
