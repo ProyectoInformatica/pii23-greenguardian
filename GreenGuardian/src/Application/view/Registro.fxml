@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="txtApellido" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="94.0" fitWidth="229.0" layoutX="300.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Img/LogoGG.png" />
          </image>
       </ImageView>
-      <TextField layoutX="98.0" layoutY="242.0" prefHeight="33.0" prefWidth="211.0" promptText="Introduzca su nombre">
+      <TextField fx:id="txtNombre" layoutX="98.0" layoutY="242.0" prefHeight="33.0" prefWidth="211.0" promptText="Introduzca su nombre">
          <font>
             <Font size="14.0" />
          </font>
@@ -26,22 +26,22 @@
       </TextField>
       <Button layoutX="193.0" layoutY="470.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="107.0" text="Volver" />
       <Button layoutX="520.0" layoutY="470.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="107.0" text="Registrarme" />
-      <TextField layoutX="98.0" layoutY="312.0" prefHeight="33.0" prefWidth="211.0" promptText="DNI">
+      <TextField fx:id="txtDni" layoutX="98.0" layoutY="312.0" prefHeight="33.0" prefWidth="211.0" promptText="DNI">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="520.0" layoutY="312.0" prefHeight="33.0" prefWidth="211.0" promptText="Telefono">
+      <TextField fx:id="txtTelefono" layoutX="520.0" layoutY="312.0" prefHeight="33.0" prefWidth="211.0" promptText="Telefono">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="98.0" layoutY="384.0" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su constraseña">
+      <TextField fx:id="txtContraRegister" layoutX="98.0" layoutY="384.0" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su constraseña">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="520.0" layoutY="384.0" prefHeight="33.0" prefWidth="211.0" promptText="Repita su contraseña">
+      <TextField fx:id="txtRepetirContra" layoutX="520.0" layoutY="384.0" prefHeight="33.0" prefWidth="211.0" promptText="Repita su contraseña">
          <font>
             <Font size="14.0" />
          </font>
