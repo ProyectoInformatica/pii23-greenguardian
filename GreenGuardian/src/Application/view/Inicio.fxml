@@ -16,22 +16,22 @@
             <Image url="@../../../Img/LogoGG.png" />
          </image>
       </ImageView>
-      <TextField layoutX="309.0" layoutY="243.0" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su usuario">
+      <TextField fx:id="txtUsuario" layoutX="309.0" layoutY="243.0" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su usuario">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="309.0" layoutY="325.0" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su contraseña">
+      <TextField fx:id="txtConstra" layoutX="309.0" layoutY="325.0" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su contraseña">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="422.0" layoutY="367.0" text="Olvide mi constraseña">
+      <Label fx:id="lblOlvideContra" layoutX="422.0" layoutY="367.0" text="Olvide mi constraseña">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Button layoutX="193.0" layoutY="437.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="107.0" text="Iniciar sesion" />
-      <Button layoutX="529.0" layoutY="437.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="107.0" text="Registrarme" />
+      <Button fx:id="btnInciarSesion" layoutX="193.0" layoutY="437.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="107.0" text="Iniciar sesion" />
+      <Button fx:id="btnRegistrar" layoutX="529.0" layoutY="437.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="107.0" text="Registrarme" />
    </children>
 </AnchorPane>
