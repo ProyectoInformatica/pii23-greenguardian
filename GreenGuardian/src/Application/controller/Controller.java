@@ -1,6 +1,6 @@
 package Application.controller;
 import java.io.IOException;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -35,8 +35,7 @@ public class Controller {
     }
 
     @FXML
-    void abrirRegistro(MouseEvent event) {	
-    	System.out.println("APRETANDO BOTON");
+    void abrirRegistro(ActionEvent event) {
     	try {
     		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/Registro.fxml"));
         	Controller control = new Controller();
@@ -47,9 +46,9 @@ public class Controller {
 			stage1.initModality(Modality.WINDOW_MODAL);
 			stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
 			stage1.show();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
     }
 }
