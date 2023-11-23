@@ -33,11 +33,25 @@ public class Controller {
     private Button btnVolverR;
     
     @FXML
+    private TextField txtIntroNombre;
+
+    @FXML
+    private TextField txtIntroApellido;
+
+    @FXML
+    private TextField txtIntroDni;
+
+    @FXML
+    private TextField txtIntroTelf;
+
+    @FXML
+    private TextField txtIntroContr;
+    
+    @FXML
     void abrirPantalla(MouseEvent event) {
     	
     }
 
-    
     @FXML
     void abrirRegistro(ActionEvent event) {
     	try {
