@@ -16,12 +16,12 @@
             <Image url="@../../../Img/LogoGG.png" />
          </image>
       </ImageView>
-      <TextField layoutX="98.0" layoutY="242.0" prefHeight="33.0" prefWidth="211.0" promptText="Introduzca su nombre" styleClass="bordes" stylesheets="@Bordes.css">
+      <TextField fx:id="txtIntroNombre" layoutX="98.0" layoutY="242.0" prefHeight="33.0" prefWidth="211.0" promptText="Introduzca su nombre" styleClass="bordes" stylesheets="@Bordes.css">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="520.0" layoutY="233.0" prefHeight="33.0" prefWidth="211.0" promptText="Introduzca su apellido" styleClass="bordes" stylesheets="@Bordes.css">
+      <TextField fx:id="txtIntroApellido" layoutX="520.0" layoutY="233.0" prefHeight="33.0" prefWidth="211.0" promptText="Introduzca su apellido" styleClass="bordes" stylesheets="@Bordes.css">
          <font>
             <Font size="14.0" />
          </font>
@@ -44,22 +44,22 @@
             <String fx:value="botones" />
             <String fx:value="bordes" />
          </styleClass></Button>
-      <TextField layoutX="98.0" layoutY="312.0" prefHeight="33.0" prefWidth="211.0" promptText="DNI" styleClass="bordes" stylesheets="@Bordes.css">
+      <TextField fx:id="txtIntroDni" layoutX="98.0" layoutY="312.0" prefHeight="33.0" prefWidth="211.0" promptText="DNI" styleClass="bordes" stylesheets="@Bordes.css">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="520.0" layoutY="312.0" prefHeight="33.0" prefWidth="211.0" promptText="Telefono" styleClass="bordes" stylesheets="@Bordes.css">
+      <TextField fx:id="txtIntroTelf" layoutX="520.0" layoutY="312.0" prefHeight="33.0" prefWidth="211.0" promptText="Telefono" styleClass="bordes" stylesheets="@Bordes.css">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="98.0" layoutY="384.0" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su constraseña" styleClass="bordes" stylesheets="@Bordes.css">
+      <TextField fx:id="txtIntroContr" layoutX="98.0" layoutY="384.0" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su constraseña" styleClass="bordes" stylesheets="@Bordes.css">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="520.0" layoutY="384.0" prefHeight="33.0" prefWidth="211.0" promptText="Repita su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
+      <TextField fx:id="txtReintroContr" layoutX="520.0" layoutY="384.0" prefHeight="33.0" prefWidth="211.0" promptText="Repita su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
          <font>
             <Font size="14.0" />
          </font>
