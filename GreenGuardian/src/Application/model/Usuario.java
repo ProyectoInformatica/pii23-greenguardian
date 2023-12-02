@@ -16,7 +16,10 @@ public class Usuario {
 		this.contra = contra;
 	}
 	
-	
+	public String toString() {
+    	String salida = "Usuario: ( "+nombre+", "+apellido+", "+dni+", "+telf+", "+contra+")";
+    	return salida;
+    }
 	
 
 }

@@ -1,5 +1,13 @@
 package Application.controller;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import Application.model.Usuario;
 import javafx.event.ActionEvent;
@@ -131,10 +139,20 @@ public class Controller {
     	contra = txtIntroContr.getText();
     	repeatContra = txtReintroContr.getText();
     	
+    	//Creo lista y leo Json
+    	ArrayList<Usuario> listaUsuarios = leerJson();
     	
-    	
-    	System.out.println("Datos: "+nombre+" "+apellido+ " "+dni+ " "+ telf+" "+contra+" "+repeatContra);
+    	//Creo el usuario
     	Usuario u = new Usuario(nombre, apellido, dni, telf, contra);
+    	
+    	u.toString();
+    	
+    	//Añado el usuario al la lista
+    	listaUsuarios.add(u);
+    	
+    	//Añado lista de usuarios al Json
+    	
+    	escribirJson(listaUsuarios);
     	
     	//Cerrar Ventana Registro y abrir Inicio
     	try {
@@ -152,7 +170,7 @@ public class Controller {
 			stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
 			stage1.show();
         	
-        	
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -165,6 +183,32 @@ public class Controller {
     	dialogo.initStyle(StageStyle.UTILITY);
     	dialogo.showAndWait();
     }
+
+	private void escribirJson(ArrayList<Usuario> listaUsuarios) {
+		Gson g = new GsonBuilder().setPrettyPrinting().create();
+		
+		try(FileWriter w = new FileWriter("Data/Usuarios.json")){
+			g.toJson(listaUsuarios,w);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private ArrayList<Usuario> leerJson() {
+		Gson g = new Gson();
+		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+		try (FileReader r = new FileReader("Data/Usuarios.json")){
+			Type lista = new TypeToken<ArrayList<Usuario>>() {}.getType();
+			listaUsuarios = g.fromJson(r, lista);
+			
+			if(listaUsuarios == null) {
+				listaUsuarios = new ArrayList<>();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listaUsuarios;
+	}
     
     
 }

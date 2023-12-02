@@ -1,0 +1,16 @@
+[
+  {
+    "nombre": "Joseph",
+    "apellido": "Vasquez",
+    "dni": "123456789G",
+    "telf": "111222333",
+    "contra": "ABCDE"
+  },
+  {
+    "nombre": "Prueba",
+    "apellido": "ApePrueba",
+    "dni": "789456123W",
+    "telf": "132456789",
+    "contra": "QWER"
+  }
+]
