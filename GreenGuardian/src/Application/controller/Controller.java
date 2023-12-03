@@ -21,6 +21,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -208,6 +209,39 @@ public class Controller {
 			e.printStackTrace();
 		}
 		return listaUsuarios;
+	}
+	// Para que en registar usuario solo acepte letras el NOMBRE 
+	@FXML
+	private void onKeyTypedEvent(KeyEvent event) {
+	    if (!event.getCharacter().matches("[a-zA-Z]")) {
+	        event.consume();
+	    }
+	}
+	
+	// Para que en registar usuario solo acepte letras el APELLIDO 
+	@FXML
+	private void onKeyTypedEvent2(KeyEvent event) {
+	    if (!event.getCharacter().matches("[a-zA-Z]")) {
+	        event.consume();
+	    }
+	}
+	
+	// Para que en registar usuario solo acepte numeros el DNI 
+	@FXML
+	private void onKeyTypedEvent3(KeyEvent event) {
+	    if (!event.getCharacter().matches("[0-9]")) {
+	        event.consume();
+	    }
+	}
+	
+	// Para que en registar usuario solo acepte numeros el TELEFONO 
+	@FXML
+	private void onKeyTypedEvent4(KeyEvent event) {
+	    TextField textField = (TextField) event.getSource();  
+	    
+	    if (!event.getCharacter().matches("[0-9]") || textField.getText().length() >= 9) {
+	        event.consume(); 
+	    }
 	}
     
     

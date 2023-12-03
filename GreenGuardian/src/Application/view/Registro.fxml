@@ -23,7 +23,7 @@
             </ImageView>
             <HBox alignment="CENTER">
                <children>
-                  <TextField fx:id="txtIntroNombre" prefHeight="33.0" prefWidth="211.0" promptText="Introduzca su nombre" styleClass="bordes" stylesheets="@Bordes.css">
+                  <TextField fx:id="txtIntroNombre" onKeyTyped="#onKeyTypedEvent" prefHeight="33.0" prefWidth="211.0" promptText="Introduzca su nombre" styleClass="bordes" stylesheets="@Bordes.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -31,7 +31,7 @@
                         <Insets right="150.0" />
                      </HBox.margin>
                   </TextField>
-                  <TextField fx:id="txtIntroApellido" prefHeight="33.0" prefWidth="211.0" promptText="Introduzca su apellido" styleClass="bordes" stylesheets="@Bordes.css">
+                  <TextField fx:id="txtIntroApellido" onKeyTyped="#onKeyTypedEvent2" prefHeight="33.0" prefWidth="211.0" promptText="Introduzca su apellido" styleClass="bordes" stylesheets="@Bordes.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -40,7 +40,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <TextField fx:id="txtIntroDni" prefHeight="33.0" prefWidth="211.0" promptText="DNI" styleClass="bordes" stylesheets="@Bordes.css">
+                  <TextField fx:id="txtIntroDni" onKeyTyped="#onKeyTypedEvent3" prefHeight="33.0" prefWidth="211.0" promptText="DNI" styleClass="bordes" stylesheets="@Bordes.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -48,7 +48,7 @@
                         <Insets right="150.0" />
                      </HBox.margin>
                   </TextField>
-                  <TextField fx:id="txtIntroTelf" prefHeight="33.0" prefWidth="211.0" promptText="Telefono" styleClass="bordes" stylesheets="@Bordes.css">
+                  <TextField fx:id="txtIntroTelf" onKeyTyped="#onKeyTypedEvent4" prefHeight="33.0" prefWidth="211.0" promptText="Telefono" styleClass="bordes" stylesheets="@Bordes.css">
                      <font>
                         <Font size="14.0" />
                      </font>
