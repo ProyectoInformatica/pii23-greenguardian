@@ -226,13 +226,25 @@ public class Controller {
 	    }
 	}
 	
-	// Para que en registar usuario solo acepte numeros el DNI 
-	@FXML
-	private void onKeyTypedEvent3(KeyEvent event) {
-	    if (!event.getCharacter().matches("[0-9]")) {
-	        event.consume();
-	    }
-	}
+	// Para que en registar usuario solo acepte 8 numeros y 1 letra en el DNI 
+    @FXML
+    private void onKeyTypedEvent3(KeyEvent event) {
+        String currentText = txtIntroDni.getText();
+        String newCharacter = event.getCharacter();
+
+        if (currentText.length() < 8) {
+            if (!newCharacter.matches("[0-9]")) {
+                event.consume();
+            }
+        } else if (currentText.length() == 8) {
+            if (!newCharacter.matches("[a-zA-Z]")) {
+                event.consume();
+            }
+        } else {
+            event.consume();
+        }
+    }
+
 	
 	// Para que en registar usuario solo acepte numeros el TELEFONO 
 	@FXML
@@ -243,6 +255,25 @@ public class Controller {
 	        event.consume(); 
 	    }
 	}
+    @FXML
+    private void onKeyTypedEvent5(KeyEvent event) {
+    }
+
+    @FXML
+    private void onKeyTypedEvent6(KeyEvent event) {
+        String allowedText = txtIntroContr.getText(); 
+        String currentTextInReintroContr = txtReintroContr.getText(); 
+
+        // Verifica si el texto en txtReintroContr coincide con txtIntroContr
+        if (!allowedText.startsWith(currentTextInReintroContr + event.getCharacter())) {
+            event.consume(); // Evitar agregar el carácter si no coincide
+        }
+
+        // Permite la corrección de errores en la contra
+        if (event.getCharacter().equals("\b") && !currentTextInReintroContr.isEmpty()) {
+            txtReintroContr.setText(currentTextInReintroContr.substring(0, currentTextInReintroContr.length() - 1));
+        }
+    }
     
     
 }

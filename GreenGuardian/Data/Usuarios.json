@@ -96,5 +96,26 @@
     "dni": "",
     "telf": "123456789",
     "contra": ""
+  },
+  {
+    "nombre": "",
+    "apellido": "",
+    "dni": "",
+    "telf": "",
+    "contra": ""
+  },
+  {
+    "nombre": "Jurgen",
+    "apellido": "Schuldt",
+    "dni": "12345678A",
+    "telf": "111111111",
+    "contra": "abc123"
+  },
+  {
+    "nombre": "",
+    "apellido": "",
+    "dni": "",
+    "telf": "",
+    "contra": ""
   }
 ]
