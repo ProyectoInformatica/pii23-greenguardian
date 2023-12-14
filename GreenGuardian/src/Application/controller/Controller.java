@@ -68,6 +68,50 @@ public class Controller {
     private TextField txtReintroContr;
     
     @FXML
+    private Button cantidadAgua;
+    
+    @FXML
+    private Button humedadTierra;
+    
+    @FXML
+    private Button temperatura;
+    
+    @FXML
+    private Button riegoManual;
+    
+    @FXML
+    private Button logOut;
+    
+    @FXML
+    private Button offRiegoAutomatico;
+    
+    @FXML
+    private Button reiniciarSensores;
+    
+    @FXML
+    private Button showSensores;
+    
+    @FXML
+    private Button logOutTecnico;
+    
+    @FXML
+    private Button verFeedback;
+    
+    @FXML
+    private Button historialSob;
+    
+    @FXML
+    private Button riegoManualSob;
+    
+    @FXML
+    private Button manualSob;
+    
+    @FXML
+    private Button logOutSob;
+    
+    
+    
+    @FXML
     void abrirPantalla(MouseEvent event) {
     	
     }

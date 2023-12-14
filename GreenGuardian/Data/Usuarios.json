@@ -117,5 +117,19 @@
     "dni": "",
     "telf": "",
     "contra": ""
+  },
+  {
+    "nombre": "",
+    "apellido": "",
+    "dni": "",
+    "telf": "",
+    "contra": ""
+  },
+  {
+    "nombre": "Izan",
+    "apellido": "DelaFuente",
+    "dni": "51498747E",
+    "telf": "689773876",
+    "contra": "Hola"
   }
 ]
