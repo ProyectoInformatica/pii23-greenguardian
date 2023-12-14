@@ -20,6 +20,15 @@ public class Usuario {
     	String salida = "Usuario: ( "+nombre+", "+apellido+", "+dni+", "+telf+", "+contra+")";
     	return salida;
     }
+
+	public String getDni() {
+		return dni;
+	}
+
+	public String getContra() {
+		return contra;
+	}
 	
 
+	
 }

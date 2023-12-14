@@ -64,7 +64,7 @@
             </VBox>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="btnInciarSesion" mnemonicParsing="false" onMouseClicked="#abrirPantalla" prefHeight="33.0" prefWidth="107.0" text="Iniciar sesion" textFill="WHITE">
+                  <Button fx:id="btnInciarSesion" mnemonicParsing="false" onAction="#iniciarSesión" onMouseClicked="#abrirPantalla" prefHeight="33.0" prefWidth="107.0" text="Iniciar sesion" textFill="WHITE">
                      <styleClass>
                         <String fx:value="botones" />
                         <String fx:value="bordes" />

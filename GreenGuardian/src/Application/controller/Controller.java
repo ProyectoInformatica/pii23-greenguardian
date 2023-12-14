@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -275,5 +276,170 @@ public class Controller {
         }
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @FXML
+    void iniciarSesión(ActionEvent event) {
+    	String dni;
+    	String contra;
+    	boolean esCorrecto = false;
+    	
+    	dni = txtUsuario.getText();
+    	contra = txtConstra.getText();
+    	
+    
+    	
+    	//Creo lista y leo Json
+    	ArrayList<Usuario> listaUsuarios = leerJson();
+    	
+    		for (int i = 0; i < listaUsuarios.size(); i++) {
+        		Usuario u1 = listaUsuarios.get(i);
+    			Usuario u = new Usuario(dni, contra, dni, dni, contra);
+    			//System.out.println(u1);
+    			//System.out.println(u);
+    			
+    			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())) {
+    				System.out.println("Registro con exito");
+    				esCorrecto = true;
+    			}	
+		}
+    	if(!esCorrecto) {
+    		System.out.println("Registro erroneo");
+    		Alert dialogo = new Alert(AlertType.ERROR);
+        	dialogo.setTitle("Datos incorrectos");
+        	dialogo.setHeaderText(null);
+        	dialogo.setContentText("Datos erróneos, por favor verifique los datos");
+        	dialogo.initStyle(StageStyle.UTILITY);
+        	dialogo.showAndWait();
+        	txtUsuario.setText("");
+        	txtConstra.setText("");
+    	}
+    	
+		
+    	
+    	
+    	//System.out.println(listaUsuarios);
+    	
+    }
     
 }
