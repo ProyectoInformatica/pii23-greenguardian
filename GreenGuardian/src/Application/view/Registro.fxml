@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -85,10 +84,9 @@
                         <String fx:value="bordes" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets />
+                        <Insets right="260.0"/>
                      </HBox.margin>
                   </Button>
-                  <JFXComboBox fx:id="comboInitialize" onAction="#initialize" />
                   <Button fx:id="btnRegistrarmeR" mnemonicParsing="false" onAction="#registrarUsuario" prefHeight="33.0" prefWidth="107.0" text="Registrarme" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
