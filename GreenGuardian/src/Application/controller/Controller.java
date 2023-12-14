@@ -6,11 +6,15 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JComboBox;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import Application.model.Usuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,10 +24,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -50,6 +56,8 @@ public class Controller {
     @FXML
     private Button btnVolverR;
     
+    
+    
     @FXML
     private TextField txtIntroNombre;
 
@@ -67,6 +75,8 @@ public class Controller {
     
     @FXML
     private TextField txtReintroContr;
+    
+    
     
     @FXML
     void abrirPantalla(MouseEvent event) {
@@ -185,6 +195,7 @@ public class Controller {
     	dialogo.initStyle(StageStyle.UTILITY);
     	dialogo.showAndWait();
     }
+    
 
 	private void escribirJson(ArrayList<Usuario> listaUsuarios) {
 		Gson g = new GsonBuilder().setPrettyPrinting().create();
@@ -346,7 +357,16 @@ public class Controller {
     
     
     
-    
+ @FXML
+    void initialize() {
+	 ObservableList<String> items = FXCollections.observableArrayList();
+	 items.addAll("Cliente", "Tecnico", "Agricultor");
+
+	 ComboBox<String> cbx = new ComboBox<>(items);
+	 StackPane pane = new StackPane(cbx);
+
+	
+ }
     
     
     
