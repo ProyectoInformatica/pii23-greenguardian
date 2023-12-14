@@ -415,8 +415,6 @@ public class Controller {
     		for (int i = 0; i < listaUsuarios.size(); i++) {
         		Usuario u1 = listaUsuarios.get(i);
     			Usuario u = new Usuario(dni, contra, dni, dni, contra);
-    			//System.out.println(u1);
-    			//System.out.println(u);
     			
     			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())) {
     				System.out.println("Registro con exito");
@@ -438,7 +436,6 @@ public class Controller {
 		
     	
     	
-    	//System.out.println(listaUsuarios);
     	
     }
     
