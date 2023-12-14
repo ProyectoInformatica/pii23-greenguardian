@@ -59,6 +59,9 @@ public class Controller {
     
     
     @FXML
+    private Button btnLogOutVP;
+    
+    @FXML
     private TextField txtIntroNombre;
 
     @FXML
@@ -437,12 +440,34 @@ public class Controller {
     			Usuario u = new Usuario(dni, contra, dni, dni, contra);
     			
     			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())) {
-    				System.out.println("Registro con exito");
     				esCorrecto = true;
+    				
+    	        	//Cerrar InicioSesion y abrir ventana principal(Provisional hasta añadir los roles)
+    	        	try {
+    	        		Node source = (Node) event.getSource();
+    	            	Stage stage = (Stage) source.getScene().getWindow();    
+    	            	stage.close(); 
+    	            	
+    	            	FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/menuPrincipal.fxml"));
+    	            	Controller control = new Controller();
+    	            	loader1.setController(control);
+    	    			Parent root1 = loader1.load();
+    	    			Stage stage1 = new Stage();
+    	    			stage1.setScene(new Scene(root1));
+    	    			stage1.initModality(Modality.WINDOW_MODAL);
+    	    			stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+    	    			stage1.show();
+    	            	
+    	    			
+    	    		} catch (Exception e) {
+    	    			e.printStackTrace();
+    	    		}
+    	        	
     			}	
 		}
+    		//Si los datos son incorrectos salta una alerta y vacia lo que has escrito
     	if(!esCorrecto) {
-    		System.out.println("Registro erroneo");
+    		
     		Alert dialogo = new Alert(AlertType.ERROR);
         	dialogo.setTitle("Datos incorrectos");
         	dialogo.setHeaderText(null);
@@ -457,6 +482,29 @@ public class Controller {
     	
     	
     	
+    }
+    
+    @FXML
+    void cerrarSesionVP(ActionEvent event) {
+    	try {
+    		Node source = (Node) event.getSource();
+        	Stage stage = (Stage) source.getScene().getWindow();    
+        	stage.close(); 
+        	
+        	FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/Inicio.fxml"));
+        	Controller control = new Controller();
+        	loader1.setController(control);
+			Parent root1 = loader1.load();
+			Stage stage1 = new Stage();
+			stage1.setScene(new Scene(root1));
+			stage1.initModality(Modality.WINDOW_MODAL);
+			stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+			stage1.show();
+        	
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
     
 }

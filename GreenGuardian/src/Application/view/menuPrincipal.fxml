@@ -107,7 +107,7 @@
             <Insets left="100.0" right="100.0" />
          </padding>
       </VBox>
-      <Button fx:id="logOut" layoutX="347.0" layoutY="520.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="107.0" text="Log out " textFill="WHITE">
+      <Button fx:id="btnLogOutVP" layoutX="347.0" layoutY="520.0" mnemonicParsing="false" onAction="#cerrarSesionVP" prefHeight="33.0" prefWidth="107.0" text="Log out " textFill="WHITE">
          <stylesheets>
             <URL value="@Botones.css" />
             <URL value="@Bordes.css" />
