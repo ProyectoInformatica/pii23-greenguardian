@@ -155,6 +155,52 @@ public class Controller{
     	contra = txtIntroContr.getText();
     	repeatContra = txtReintroContr.getText();
     	
+    	// Validación del nombre
+        if (nombre.isEmpty() || !nombre.matches("[a-zA-Z ]+")) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.setContentText("El nombre está vacío o contiene caracteres no válidos.");
+            alert.showAndWait();
+            return; // Detiene la ejecución si la validación del nombre falla
+        }
+        // Validación del apellido
+        if (apellido.isEmpty() || !apellido.matches("[a-zA-Z ]+")) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.setContentText("El apellido está vacío o contiene caracteres no válidos.");
+            alert.showAndWait();
+            return; // Detiene la ejecución si la validación del apellido falla
+        }
+        // Validación del DNI
+        if (!dni.matches("\\d{8}[A-Za-z]")) { // 8 dígitos seguidos de una letra
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.setContentText("El DNI debe contener 8 dígitos seguidos de una letra.");
+            alert.showAndWait();
+            return; // Detiene la ejecución si la validación del DNI falla
+        }
+        // Validación del Teléfono
+        if (!telf.matches("\\d{9}")) { // Exactamente 9 dígitos
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.setContentText("El teléfono debe contener exactamente 9 dígitos.");
+            alert.showAndWait();
+            return; // Detiene la ejecución si la validación del teléfono falla
+        }
+        // Validación de Coincidencia de Contraseñas
+        if (!contra.equals(repeatContra)) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.setContentText("Las contraseñas no coinciden.");
+            alert.showAndWait();
+            return; // Detiene la ejecución si las contraseñas no coinciden
+        }
+    	
     	//Creo lista y leo Json
     	ArrayList<Usuario> listaUsuarios = leerJson();
     	
@@ -271,79 +317,15 @@ public class Controller{
 	        event.consume(); 
 	    }
 	}
-    @FXML
-    private void onKeyTypedEvent5(KeyEvent event) {
-    }
 
-    @FXML
-    private void onKeyTypedEvent6(KeyEvent event) {
-        String allowedText = txtIntroContr.getText(); 
-        String currentTextInReintroContr = txtReintroContr.getText(); 
-
-        // Verifica si el texto en txtReintroContr coincide con txtIntroContr
-        if (!allowedText.startsWith(currentTextInReintroContr + event.getCharacter())) {
-            event.consume(); // Evitar agregar el carácter si no coincide
-        }
-
-        // Permite la corrección de errores en la contra
-        if (event.getCharacter().equals("\b") && !currentTextInReintroContr.isEmpty()) {
-            txtReintroContr.setText(currentTextInReintroContr.substring(0, currentTextInReintroContr.length() - 1));
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+	
+	
+	
+	
+	
+	
+	
+	
     
     
     /*
@@ -355,72 +337,6 @@ public class Controller{
     }
     */
 
-   
-    
-    
-   
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @FXML
     void iniciarSesión(ActionEvent event) {
     	String dni;

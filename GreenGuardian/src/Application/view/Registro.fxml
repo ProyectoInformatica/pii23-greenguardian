@@ -58,7 +58,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <TextField fx:id="txtIntroContr" onKeyTyped="#onKeyTypedEvent5" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
+                  <TextField fx:id="txtIntroContr"  prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -66,7 +66,7 @@
                         <Insets right="150.0" />
                      </HBox.margin>
                   </TextField>
-                  <TextField fx:id="txtReintroContr" onKeyTyped="#onKeyTypedEvent6" prefHeight="33.0" prefWidth="211.0" promptText="Repita su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
+                  <TextField fx:id="txtReintroContr"  prefHeight="33.0" prefWidth="211.0" promptText="Repita su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
                      <font>
                         <Font size="14.0" />
                      </font>
