@@ -6,8 +6,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.JComboBox;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -34,7 +32,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class Controller {
+public class Controller{
 	@FXML
     private TextField txtUsuario;
 
@@ -78,6 +76,9 @@ public class Controller {
     
     @FXML
     private TextField txtReintroContr;
+    
+    @FXML
+    private ComboBox<String> rolesComboBox;
     
     
     
@@ -345,31 +346,30 @@ public class Controller {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
- @FXML
-    void initialize() {
-	 ObservableList<String> items = FXCollections.observableArrayList();
-	 items.addAll("Cliente", "Tecnico", "Agricultor");
+    /*
+    @FXML
+    private void initialize() {
+        // Inicializar el ComboBox con roles
+        rolesComboBox.getItems().addAll("Cliente", "Agricultor", "Técnico");
 
-	 ComboBox<String> cbx = new ComboBox<>(items);
-	 StackPane pane = new StackPane(cbx);
+    }
+    */
 
-	
- }
+   
+    
+    
+   
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
     
     
     

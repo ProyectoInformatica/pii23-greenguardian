@@ -29,8 +29,30 @@ public class Main extends Application{
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
+	    /*
+	    try {
+            // Cargar la interfaz gráfica desde el archivo FXML (Registro.fxml)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Application/view/Registro.fxml"));
+            Parent root = loader.load();
+            
+         // Obtener el controlador asociado a la pantalla de inicio
+            Controller inicioController = loader.getController();
+
+            // Configurar la escena
+            Scene scene = new Scene(root);
+
+            // Configurar el escenario principal
+            primaryStage.setScene(scene);
+
+            // Mostrar la ventana
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
 	}
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }
