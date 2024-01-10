@@ -37,7 +37,7 @@
                         <Insets bottom="25.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="txtConstra" maxHeight="33.0" maxWidth="300.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="33.0" prefWidth="229.0" promptText="Ingrese su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
+                  <TextField fx:id="txtConstra" accessibleRole="PASSWORD_FIELD" maxHeight="33.0" maxWidth="300.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="33.0" prefWidth="229.0" promptText="Ingrese su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
                      <font>
                         <Font size="14.0" />
                      </font>
