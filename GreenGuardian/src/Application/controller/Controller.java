@@ -24,6 +24,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -39,9 +40,6 @@ public class Controller{
     private TextField txtUsuario;
 
     @FXML
-    private TextField txtConstra;
-
-    @FXML
     private Label lblOlvideContra;
 
     @FXML
@@ -51,7 +49,8 @@ public class Controller{
     private Button btnRegistrar;
     
     @FXML
-    private Button btnLogOutVP;   
+    private PasswordField txtContra;
+    
     
     @FXML
     void abrirPantalla(MouseEvent event) {
@@ -80,7 +79,7 @@ public class Controller{
 			e.printStackTrace();
 		}
     }
-
+    
 	private ArrayList<Usuario> leerJson() {
 		Gson g = new Gson();
 		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
@@ -113,8 +112,8 @@ public class Controller{
     	boolean esCorrecto = false;
     	
     	dni = txtUsuario.getText();
-    	contra = txtConstra.getText();
-	
+    	contra = txtContra.getText();
+    	
     	//Creo lista y leo Json
     	ArrayList<Usuario> listaUsuarios = leerJson();
     	
@@ -161,9 +160,11 @@ public class Controller{
         	dialogo.initStyle(StageStyle.UTILITY);
         	dialogo.showAndWait();
         	txtUsuario.setText("");
-        	txtConstra.setText("");
+        	txtContra.setText("");
+
     	}  	
     	
     }  
-    
+
+
 }

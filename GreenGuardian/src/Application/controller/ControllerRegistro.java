@@ -117,13 +117,20 @@ public class ControllerRegistro {
             return; // Detiene la ejecución si la validación del apellido falla
         }
         // Validación del DNI
-        if (!dni.matches("\\d{8}[A-Za-z]")) { // 8 dígitos seguidos de una letra
+        /*if (!dni.matches("\\d{8}[A-Za-z]")) { // 8 dígitos seguidos de una letra
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Advertencia");
             alert.setHeaderText(null);
             alert.setContentText("El DNI debe contener 8 dígitos seguidos de una letra.");
             alert.showAndWait();
             return; // Detiene la ejecución si la validación del DNI falla
+        }*/
+        if(!validarNIF(dni)) {
+        	Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.setContentText("DNI incorrecto");
+            alert.showAndWait();
         }
         // Validación del Teléfono
         if (!telf.matches("\\d{9}")) { // Exactamente 9 dígitos
@@ -261,4 +268,53 @@ public class ControllerRegistro {
 		}
 		return listaUsuarios;
 	}
+	
+    public boolean validarNIF(String dni) {
+        String numerosInteriores;
+        dni = dni.toUpperCase();
+        // Comprobar si el NIF mide 9 caracteres
+        if (dni.length() != 9) {
+            return false;
+
+        }
+
+        // Comprobar si los caracteres que se encuentran entre la(s) letra(s) son números
+        for (int i = 1; i < dni.length()-1; i++) {
+            if (!Character.isDigit(dni.charAt(i))) {
+                return false;
+            }
+        }
+
+
+        // Comprobar si la letra del NIF es correcta
+        String letraFinal = "TRWAGMYFPDXBNJZSQVHLCKE";
+        String letraNIE = "XYZ";
+
+        if (letraNIE.contains((String.valueOf(dni.charAt(0))))) {
+            switch (dni.charAt(0)) {
+                case 'X':
+                    dni = dni.substring(1);
+                    dni = "0" + dni;
+                    break;
+                case 'Y':
+                    dni = dni.substring(1);
+                    dni = "1" + dni;
+                    break;
+                case 'Z':
+                    dni = dni.substring(1);
+                    dni = "2" + dni;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        int numeroDni = Integer.parseInt(dni.substring(0, 8));
+        char letraCalculada = letraFinal.charAt(numeroDni % 23);
+
+        if (letraCalculada != (dni.charAt(8))) {
+            return false;
+        }
+        return true;
+}
 }
