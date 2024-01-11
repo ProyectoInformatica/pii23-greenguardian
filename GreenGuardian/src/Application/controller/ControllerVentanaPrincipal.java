@@ -12,8 +12,12 @@ import javafx.stage.Stage;
 
 public class ControllerVentanaPrincipal {
 	@FXML
-	 private Label lblNomPagPrincipal;
+	 private Label lblNomPagPrincipal;	
 	
+	public void setLabelText(String text) {
+        lblNomPagPrincipal.setText("Bienvenido "+text);
+    }
+		
 	 @FXML
 	    void cerrarSesionVP(ActionEvent event) {
 	    	try {
@@ -37,3 +41,5 @@ public class ControllerVentanaPrincipal {
 			}
 	    }
 }
+
+

@@ -53,6 +53,7 @@ public class ControllerRegistro {
     
     @FXML
     private ComboBox<String> rolesComboBox;
+    
 	//Cerrar registro y abrir ventana login
     @FXML
     void cerrarRegsitro(ActionEvent event) {
@@ -131,6 +132,7 @@ public class ControllerRegistro {
             alert.setHeaderText(null);
             alert.setContentText("DNI incorrecto");
             alert.showAndWait();
+            return;
         }
         // Validación del Teléfono
         if (!telf.matches("\\d{9}")) { // Exactamente 9 dígitos

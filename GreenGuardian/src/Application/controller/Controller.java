@@ -51,7 +51,7 @@ public class Controller{
     @FXML
     private PasswordField txtContra;
     
-    
+    public String nombre;
     @FXML
     void abrirPantalla(MouseEvent event) {
     	
@@ -122,10 +122,10 @@ public class Controller{
     			Usuario u = new Usuario(dni, contra, dni, dni, contra);
     			
     			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())) {
-    				nom = u1.getNombre();
+    				nombre = u1.getNombre();
     				esCorrecto = true;
     				
-    				//lblNomPagPrincipal.setText(nom);
+    				 
     				
     	        	//Cerrar InicioSesion y abrir ventana principal(Provisional hasta añadir los roles)
     	        	try {
@@ -142,7 +142,7 @@ public class Controller{
     	    			stage1.initModality(Modality.WINDOW_MODAL);
     	    			stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
     	    			stage1.show();
-    	            	
+    	    			control.setLabelText(nombre);
     	    			
     	    		} catch (Exception e) {
     	    			e.printStackTrace();
