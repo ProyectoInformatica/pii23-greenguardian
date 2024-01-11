@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane  prefHeight="600.0" prefWidth="800.0" styleClass="windows" stylesheets="@Ventana.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"> 
+<AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="windows" stylesheets="@Ventana.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"> 
    <children> 
       <VBox alignment="CENTER" layoutY="14.0" spacing="50.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
          <children>
@@ -58,7 +58,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <TextField fx:id="txtIntroContr"  prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
+                  <TextField fx:id="txtIntroContr" prefHeight="33.0" prefWidth="211.0" promptText="Ingrese su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -66,7 +66,7 @@
                         <Insets right="150.0" />
                      </HBox.margin>
                   </TextField>
-                  <TextField fx:id="txtReintroContr"  prefHeight="33.0" prefWidth="211.0" promptText="Repita su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
+                  <TextField fx:id="txtReintroContr" prefHeight="33.0" prefWidth="211.0" promptText="Repita su contraseña" styleClass="bordes" stylesheets="@Bordes.css">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -88,7 +88,7 @@
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <ComboBox  prefHeight="33.0" prefWidth="107.0">
+                  <ComboBox fx:id="rolesComboBox" prefHeight="33.0" prefWidth="107.0">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

@@ -3,16 +3,21 @@ package Application.controller;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import Application.model.Usuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,7 +31,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class ControllerRegistro {
+public class ControllerRegistro implements Initializable{
 	@FXML
     private TextField txtIntroNombre;
 
@@ -93,6 +98,7 @@ public class ControllerRegistro {
     	String telf;
     	String contra;
     	String repeatContra;
+    	String selectedRole;
     	
     	//Recoger datos de los texfield 
     	nombre= txtIntroNombre.getText();
@@ -101,7 +107,8 @@ public class ControllerRegistro {
     	telf = txtIntroTelf.getText();
     	contra = txtIntroContr.getText();
     	repeatContra = txtReintroContr.getText();
-    	Usuario u = new Usuario(nombre, apellido, dni, telf, contra);
+    	selectedRole = rolesComboBox.getValue();
+    	Usuario u = new Usuario(nombre, apellido, dni, telf, contra,selectedRole);
     	// Validación del nombre
         if (nombre.isEmpty() || !nombre.matches("[a-zA-Z ]+")) {
             Alert alert = new Alert(AlertType.WARNING);
@@ -167,6 +174,7 @@ public class ControllerRegistro {
             alert.showAndWait();
             return; // Detiene la ejecución si las contraseñas no coinciden
         }
+        
     	
     	//Creo lista y leo Json
     	
@@ -281,7 +289,6 @@ public class ControllerRegistro {
 	}
 	
     public boolean validarNIF(String dni) {
-        String numerosInteriores;
         dni = dni.toUpperCase();
         // Comprobar si el NIF mide 9 caracteres
         if (dni.length() != 9) {
@@ -328,4 +335,10 @@ public class ControllerRegistro {
         }
         return true;
 }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ObservableList<String> roles = FXCollections.observableArrayList("Cliente", "Agricultor", "Técnico");
+        rolesComboBox.setItems(roles);	
+	}
 }
