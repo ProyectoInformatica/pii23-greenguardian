@@ -1,18 +1,13 @@
 package Application.controller;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import Application.model.Usuario;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,13 +17,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -108,7 +100,6 @@ public class Controller{
     void iniciarSesión(ActionEvent event) {
     	String dni;
     	String contra;
-    	String nom;
     	boolean esCorrecto = false;
     	
     	dni = txtUsuario.getText();
@@ -119,7 +110,7 @@ public class Controller{
     	
     		for (int i = 0; i < listaUsuarios.size(); i++) {
         		Usuario u1 = listaUsuarios.get(i);
-    			Usuario u = new Usuario(dni, contra, dni, dni, contra);
+    			Usuario u = new Usuario(dni, contra, dni, dni, contra,contra);
     			
     			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())) {
     				nombre = u1.getNombre();

@@ -7,13 +7,15 @@ public class Usuario {
 	private String dni;
 	private String telf;
 	private String contra;
+	private String rol;
 	
-	public Usuario(String nombre, String apellido, String dni, String telf, String contra) {
+	public Usuario(String nombre, String apellido, String dni, String telf, String contra, String rol) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
 		this.telf = telf;
 		this.contra = contra;
+		this.rol = rol;
 	}
 	
 	public String toString() {
@@ -32,5 +34,8 @@ public class Usuario {
 
 	public String getNombre() {
 		return nombre;
+	}
+	public String getRol() {
+		return rol;
 	}
 }
