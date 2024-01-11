@@ -1,30 +1,31 @@
 package Application.model;
 
 public class Sensor {
-	private String sensorTemp1;
-	private String sensorTemp2;
-	private String sensorAgua;
-	private String sensorHume;
+	private Double sensorTemp1;
+	private Double sensorTemp2;
+	private Double sensorAgua;
+	private Double sensorHume;
 
 	
-	public Sensor(String sensorTemp1,String sensorTemp2, String sensorAgua, String sensorHume ) {
+	public Sensor(Double sensorTemp1,Double sensorTemp2, Double sensorAgua, Double sensorHume ) {
 		this.sensorTemp1 = sensorTemp1;
 		this.sensorTemp2 = sensorTemp2;
 		this.sensorAgua = sensorAgua;
 		this.sensorHume = sensorHume;
+		
 	
 	}
 	
-	public String getSensor1() {
+	public Double getSensor1() {
 		return sensorTemp1;
 	}
-	public String getSensor2() {
+	public Double getSensor2() {
 		return sensorTemp2;
 	}
-	public String getSensor3() {
+	public Double getSensor3() {
 		return sensorAgua;
 	}
-	public String getSensor4() {
+	public Double getSensor4() {
 		return sensorHume;
 	}
 
