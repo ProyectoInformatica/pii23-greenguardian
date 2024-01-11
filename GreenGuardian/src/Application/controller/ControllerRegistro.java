@@ -82,6 +82,9 @@ public class ControllerRegistro {
   //Registrar usuario
     @FXML
     void registrarUsuario(ActionEvent event) {
+    	ArrayList<Usuario> listaUsuarios = leerJson();
+    	
+    	//Creo el usuario
     	
     	String nombre;
     	String apellido;
@@ -97,7 +100,7 @@ public class ControllerRegistro {
     	telf = txtIntroTelf.getText();
     	contra = txtIntroContr.getText();
     	repeatContra = txtReintroContr.getText();
-    	
+    	Usuario u = new Usuario(nombre, apellido, dni, telf, contra);
     	// Validación del nombre
         if (nombre.isEmpty() || !nombre.matches("[a-zA-Z ]+")) {
             Alert alert = new Alert(AlertType.WARNING);
@@ -125,13 +128,39 @@ public class ControllerRegistro {
             alert.showAndWait();
             return; // Detiene la ejecución si la validación del DNI falla
         }*/
-        if(!validarNIF(dni)) {
+        /*if(!validarNIF(dni)) {
+        	if (dni) {
+        		
+        	}else {
         	Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Advertencia");
             alert.setHeaderText(null);
             alert.setContentText("DNI incorrecto");
             alert.showAndWait();
-        }
+            return;
+        	}
+        }*/
+        	
+
+        	    // Verificación de DNI duplicado
+        	    if (listaUsuarios.stream().anyMatch(usuario -> usuario.getDni().equals(dni))) {
+        	        // Mostrar un mensaje de error
+        	        Alert alert = new Alert(AlertType.ERROR);
+        	        alert.setTitle("Error de Registro");
+        	        alert.setHeaderText("DNI Duplicado");
+        	        alert.setContentText("Ya existe un usuario con este DNI.");
+        	        alert.showAndWait();
+        	        return;
+        	    }
+
+        	    listaUsuarios.add(u);
+        	    escribirJson(listaUsuarios);
+
+        	    // Mensaje de usuario registrado
+        	    Alert dialogo = new Alert(AlertType.INFORMATION);
+        	    dialogo.setTitle("Usuario Registrado");
+        	    dialogo.setContentText("Usuario registrado correctamente");
+        	    dialogo.showAndWait();
         // Validación del Teléfono
         if (!telf.matches("\\d{9}")) { // Exactamente 9 dígitos
             Alert alert = new Alert(AlertType.WARNING);
@@ -152,19 +181,16 @@ public class ControllerRegistro {
         }
     	
     	//Creo lista y leo Json
-    	ArrayList<Usuario> listaUsuarios = leerJson();
+
     	
-    	//Creo el usuario
-    	Usuario u = new Usuario(nombre, apellido, dni, telf, contra);
-    	
-    	u.toString();
+    	//u.toString();
     	
     	//Añado el usuario al la lista
-    	listaUsuarios.add(u);
+    	//listaUsuarios.add(u);
     	
     	//Añado lista de usuarios al Json
     	
-    	escribirJson(listaUsuarios);
+    	//escribirJson(listaUsuarios);
     	
     	//Cerrar Ventana Registro y abrir Inicio
     	try {
@@ -188,12 +214,12 @@ public class ControllerRegistro {
 		}
     	
     	//Ventana Info
-    	Alert dialogo = new Alert(AlertType.INFORMATION);
-    	dialogo.setTitle("Usuario Registrado");
-    	dialogo.setHeaderText(null);
-    	dialogo.setContentText("Usuario registrado correctamente");
-    	dialogo.initStyle(StageStyle.UTILITY);
-    	dialogo.showAndWait();
+    	Alert dialogo1 = new Alert(AlertType.INFORMATION);
+    	dialogo1.setTitle("Usuario Registrado");
+    	dialogo1.setHeaderText(null);
+    	dialogo1.setContentText("Usuario registrado correctamente");
+    	dialogo1.initStyle(StageStyle.UTILITY);
+    	dialogo1.showAndWait();
     }
     
  // Para que en registar usuario solo acepte letras el NOMBRE 
@@ -318,3 +344,32 @@ public class ControllerRegistro {
         return true;
 }
 }
+/*
+ * 
+ * void registrarUsuario(ActionEvent event) {
+    ArrayList<Usuario> listaUsuarios = leerJson();
+
+    String dni = // obtén el DNI del formulario de registro;
+    Usuario u = new Usuario(nombre, apellido, dni, telf, contra);
+
+    // Verificación de DNI duplicado
+    if (listaUsuarios.stream().anyMatch(usuario -> usuario.getDni().equals(dni))) {
+        // Mostrar un mensaje de error
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error de Registro");
+        alert.setHeaderText("DNI Duplicado");
+        alert.setContentText("Ya existe un usuario con este DNI.");
+        alert.showAndWait();
+        return;
+    }
+
+    listaUsuarios.add(u);
+    escribirJson(listaUsuarios);
+
+    // Mensaje de usuario registrado
+    Alert dialogo = new Alert(AlertType.INFORMATION);
+    dialogo.setTitle("Usuario Registrado");
+    dialogo.setContentText("Usuario registrado correctamente");
+    dialogo.showAndWait();
+}
+*/
