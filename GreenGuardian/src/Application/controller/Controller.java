@@ -87,14 +87,6 @@ public class Controller{
 		}
 		return listaUsuarios;
 	} 
-    /*
-    @FXML
-    private void initialize() {
-        // Inicializar el ComboBox con roles
-        rolesComboBox.getItems().addAll("Cliente", "Agricultor", "Técnico");
-
-    }
-    */
 
     @FXML
     void iniciarSesión(ActionEvent event) {
@@ -112,7 +104,7 @@ public class Controller{
         		Usuario u1 = listaUsuarios.get(i);
     			Usuario u = new Usuario(dni, contra, dni, dni, contra,contra);
     			
-    			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())) {
+    			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra()) & u1.getRol().equals("Cliente")) {
     				nombre = u1.getNombre();
     				esCorrecto = true;
     				
@@ -140,6 +132,64 @@ public class Controller{
     	    		}
     	        	
     			}	
+    			
+    			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())& u1.getRol().equals("Agricultor")) {
+    				nombre = u1.getNombre();
+    				esCorrecto = true;
+    				
+    				 
+    				
+    	        	//Cerrar InicioSesion y abrir ventana principal(Provisional hasta añadir los roles)
+    	        	try {
+    	        		Node source = (Node) event.getSource();
+    	            	Stage stage = (Stage) source.getScene().getWindow();    
+    	            	stage.close(); 
+    	            	
+    	            	FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/menuAgricultor.fxml"));
+    	            	ControllerVAgricultor control = new ControllerVAgricultor();
+    	            	loader1.setController(control);
+    	    			Parent root1 = loader1.load();
+    	    			Stage stage1 = new Stage();
+    	    			stage1.setScene(new Scene(root1));
+    	    			stage1.initModality(Modality.WINDOW_MODAL);
+    	    			stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+    	    			stage1.show();
+    	    			control.setLabelText(nombre);
+    	    			
+    	    		} catch (Exception e) {
+    	    			e.printStackTrace();
+    	    		}
+    	        	
+    			}
+    			
+    			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())& u1.getRol().equals("Técnico")) {
+    				nombre = u1.getNombre();
+    				esCorrecto = true;
+    				
+    				 
+    				
+    	        	//Cerrar InicioSesion y abrir ventana principal(Provisional hasta añadir los roles)
+    	        	try {
+    	        		Node source = (Node) event.getSource();
+    	            	Stage stage = (Stage) source.getScene().getWindow();    
+    	            	stage.close(); 
+    	            	
+    	            	FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/menuTecnico.fxml"));
+    	            	ControllerVTecnico control = new ControllerVTecnico();
+    	            	loader1.setController(control);
+    	    			Parent root1 = loader1.load();
+    	    			Stage stage1 = new Stage();
+    	    			stage1.setScene(new Scene(root1));
+    	    			stage1.initModality(Modality.WINDOW_MODAL);
+    	    			stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+    	    			stage1.show();
+    	    			control.setLabelText(nombre);
+    	    			
+    	    		} catch (Exception e) {
+    	    			e.printStackTrace();
+    	    		}
+    	        	
+    			}
 		}
     		//Si los datos son incorrectos salta una alerta y vacia lo que has escrito
     	if(!esCorrecto) {

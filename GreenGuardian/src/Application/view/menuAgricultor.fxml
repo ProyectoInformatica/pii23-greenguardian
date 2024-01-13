@@ -21,7 +21,7 @@
                   <Image url="@../../../Img/LogoGG.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="33.0" prefWidth="211.0" text="Bienvenido (nombre)" textFill="#115a51">
+            <Label fx:id="lblNomVA" alignment="CENTER" contentDisplay="TOP" prefHeight="33.0" prefWidth="211.0" text="Bienvenido (nombre)" textFill="#115a51">
                <stylesheets>
                   <URL value="@Bordes.css" />
                   <URL value="@Label.css" />
@@ -76,7 +76,7 @@
                         <Insets right="150.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="LogOutSob" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" text="Log Out" textFill="WHITE">
+                  <Button fx:id="LogOutSob" mnemonicParsing="false" onAction="#cerrarSesionVA" prefHeight="33.0" prefWidth="211.0" text="Log Out" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />

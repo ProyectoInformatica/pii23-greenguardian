@@ -1,9 +1,49 @@
 [
   {
-    "nombre": "fwfrfsedf",
-    "apellido": "fewfewfew",
-    "dni": "22693771Q",
-    "telf": "065198498",
+    "nombre": "Nicole",
+    "apellido": "Alvarez",
+    "dni": "85138032J",
+    "telf": "678230148",
+    "contra": "hola",
+    "rol": "Cliente"
+  },
+  {
+    "nombre": "Clara",
+    "apellido": "Miguez",
+    "dni": "32202166G",
+    "telf": "620145795",
+    "contra": "123",
+    "rol": "Agricultor"
+  },
+  {
+    "nombre": "Antonio",
+    "apellido": "Ortiz",
+    "dni": "77281963P",
+    "telf": "658103575",
+    "contra": "123",
+    "rol": "Técnico"
+  },
+  {
+    "nombre": "Jesus",
+    "apellido": "Sanchez",
+    "dni": "33805160J",
+    "telf": "603547982",
+    "contra": "hola",
+    "rol": "Cliente"
+  },
+  {
+    "nombre": "Javier",
+    "apellido": "Ochoa",
+    "dni": "18204612C",
+    "telf": "679530456",
+    "contra": "123",
+    "rol": "Agricultor"
+  },
+  {
+    "nombre": "Luis",
+    "apellido": "Peralta",
+    "dni": "61166669D",
+    "telf": "603541289",
     "contra": "123",
     "rol": "Técnico"
   }

@@ -11,34 +11,29 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ControllerVentanaPrincipal {
-	@FXML
-	private Label lblNomPagPrincipal;
-	
-	@FXML
-	private Button cantidadAgua;
+public class ControllerVTecnico {
 
-	@FXML
-	private Button offRiegoAutomatico;
-
-	@FXML
-	private Button humedadTierra;
-
-	@FXML
-	private Button riegoManual;
-
-	@FXML
-	private Button temperatura;
-
-	@FXML
-	private Button btnLogOutVP;
-	
-	public void setLabelText(String text) {
-        lblNomPagPrincipal.setText("Bienvenid@ "+text);
-    }
-		
 	 @FXML
-	    void cerrarSesionVP(ActionEvent event) {
+	    private Label lblNomVT;
+
+	    @FXML
+	    private Button showSensores;
+
+	    @FXML
+	    private Button reiniciarSensores;
+
+	    @FXML
+	    private Button verFeedback;
+
+	    @FXML
+	    private Button logOutTeccnico;
+	    
+	    public void setLabelText(String text) {
+	        lblNomVT.setText("Bienvenid@ "+text);
+	    }
+	    
+	    @FXML
+	    void cerrarSesionVT(ActionEvent event) {
 	    	try {
 	    		Node source = (Node) event.getSource();
 	        	Stage stage = (Stage) source.getScene().getWindow();    
@@ -60,5 +55,3 @@ public class ControllerVentanaPrincipal {
 			}
 	    }
 }
-
-
