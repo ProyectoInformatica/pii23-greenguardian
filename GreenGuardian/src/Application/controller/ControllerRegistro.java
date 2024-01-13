@@ -151,7 +151,7 @@ public class ControllerRegistro implements Initializable{
         	        // Mostrar un mensaje de error
         	        Alert alert = new Alert(AlertType.ERROR);
         	        alert.setTitle("Error de Registro");
-        	        alert.setHeaderText("DNI Duplicado");
+        	        alert.setHeaderText(null);
         	        alert.setContentText("Ya existe un usuario con este DNI.");
         	        alert.showAndWait();
         	        return;
