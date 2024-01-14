@@ -174,6 +174,15 @@ public class ControllerRegistro implements Initializable{
             alert.showAndWait();
             return; // Detiene la ejecución si las contraseñas no coinciden
         }
+        if (selectedRole == null || selectedRole.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error en el Registro");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, selecciona un rol.");
+            alert.showAndWait();
+            return; // No continuar con el registro
+        }
+
         
     	
     	//Creo lista y leo Json

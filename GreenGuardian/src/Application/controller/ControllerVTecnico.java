@@ -1,5 +1,10 @@
 package Application.controller;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,5 +58,16 @@ public class ControllerVTecnico {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+	    }
+	    public void guardarDatosEnJson() {
+	        Gson gson = new Gson();
+	        String json = gson.toJson(this);
+
+	        try (FileWriter file = new FileWriter("Data/Sensores.json")) {
+	            file.write(json);
+	            file.flush();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
 	    }
 }

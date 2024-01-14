@@ -36,7 +36,7 @@
             </Label>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="cantidadAgua" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" text="Cantidad de agua" textFill="WHITE">
+                  <Button fx:id="cantidadAgua" mnemonicParsing="false" onAction="#irCantidadAgua" prefHeight="33.0" prefWidth="211.0" text="Cantidad de agua" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />
@@ -63,7 +63,7 @@
                         <Insets right="150.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="humedadTierra" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" text="Humedad de la tierra" textFill="WHITE">
+                  <Button fx:id="humedadTierra" mnemonicParsing="false" onAction="#irHumedadTierra" prefHeight="33.0" prefWidth="211.0" text="Humedad de la tierra" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />
@@ -90,7 +90,8 @@
                         <Insets right="150.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="temperatura" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" text="Ver temperatura" textFill="WHITE">
+                   <Button fx:id="btnTemperatura" mnemonicParsing="false" onAction="#abrirVentanaTemperatura" prefHeight="33.0" prefWidth="211.0" text="Ver temperatura" textFill="WHITE">
+                  
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />

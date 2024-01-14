@@ -46,5 +46,29 @@
     "telf": "603541289",
     "contra": "123",
     "rol": "Técnico"
+  },
+  {
+    "nombre": "lol",
+    "apellido": "lol",
+    "dni": "11111111h",
+    "telf": "444444444",
+    "contra": "lol",
+    "rol": "Cliente"
+  },
+  {
+    "nombre": "q",
+    "apellido": "q",
+    "dni": "56621126W",
+    "telf": "777777777",
+    "contra": "q",
+    "rol": "Cliente"
+  },
+  {
+    "nombre": "k",
+    "apellido": "k",
+    "dni": "57207409S",
+    "telf": "777777777",
+    "contra": "k",
+    "rol": "Cliente"
   }
 ]

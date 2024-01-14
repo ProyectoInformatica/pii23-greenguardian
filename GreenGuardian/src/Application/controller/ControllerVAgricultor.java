@@ -1,5 +1,12 @@
 package Application.controller;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,5 +61,18 @@ public class ControllerVAgricultor {
 			e.printStackTrace();
 		}
     
-    }
+	}
+
+	    public void guardarDatosEnJson() {
+	        Gson gson = new Gson();
+	        String json = gson.toJson(this);
+
+	        try (FileWriter file = new FileWriter("Data/Sensores.json")) {
+	            file.write(json);
+	            file.flush();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
 }
