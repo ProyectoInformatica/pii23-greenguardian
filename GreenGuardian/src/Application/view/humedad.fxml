@@ -21,8 +21,11 @@
                <image>
                   <Image url="@../../../Img/LogoGG.png" />
                </image>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </ImageView>
-            <HBox prefHeight="309.0" prefWidth="879.0">
+            <HBox alignment="CENTER" prefHeight="309.0" prefWidth="879.0">
                <children>
                   <BarChart fx:id="MostrarHumedad" title="Humedad">
                      <xAxis>
@@ -32,7 +35,7 @@
                         <NumberAxis side="LEFT" />
                      </yAxis>
                      <HBox.margin>
-                        <Insets left="190.0" />
+                        <Insets left="60.0" />
                      </HBox.margin>
                   </BarChart>
                   <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#MostrarHumedad" text="Actualizar" textFill="WHITE">
