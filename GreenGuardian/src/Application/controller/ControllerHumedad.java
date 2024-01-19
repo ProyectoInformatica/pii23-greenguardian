@@ -7,6 +7,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +22,8 @@ import com.google.gson.reflect.TypeToken;
 import Application.model.Sensor;
 import Application.model.Session;
 import Application.model.Usuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +31,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.chart.BarChart;
@@ -37,6 +43,9 @@ public class ControllerHumedad {
 
         @FXML
         private Button btnActualizar;
+        
+        @FXML
+        private ComboBox<Date> cmbFechas;
 
         @FXML
         private Button VolverMenuPrin;
@@ -68,11 +77,27 @@ public class ControllerHumedad {
                 MostrarHumedad.getData().clear();
                 MostrarHumedad.getData().add(series);
             }
+        
+        @FXML
+        void initialize() {
+            List<Date> fechas = obtenerFechasDesdeSensores(listaSenHumUser);
+
+            ObservableList<Date> fechasObservable = FXCollections.observableArrayList(fechas);
+            cmbFechas.setItems(fechasObservable);
+        }
+
+        private List<Date> obtenerFechasDesdeSensores(ArrayList<Sensor> sensores) {
+            return sensores.stream().map(Sensor::getFecha).collect(Collectors.toList());
+        }
         	@FXML
             private double obtenerHumedad() {
+        		Date fechaSeleccionada = cmbFechas.getValue();
                 
-            	
-                return 45.0; 
+                // Buscar el sensor correspondiente
+                Optional<Sensor> sensorOptional = listaSenHumUser.stream().filter(sensor -> sensor.getFecha().equals(fechaSeleccionada))
+                        .findFirst();
+
+                return sensorOptional.map(Sensor::getDato).orElse(0);
             }
 
 

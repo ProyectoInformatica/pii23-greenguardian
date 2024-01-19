@@ -7,6 +7,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +22,8 @@ import com.google.gson.reflect.TypeToken;
 import Application.model.Sensor;
 import Application.model.Session;
 import Application.model.Usuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +33,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 public class ControllerCantidadAgua {
@@ -38,6 +44,9 @@ public class ControllerCantidadAgua {
 
 	    @FXML
 	    private Button btnActualizar;
+	    
+	    @FXML
+	    private ComboBox<Date> cmbFechas;
 
 	    @FXML
 	    private Button VolverMenuPrin;
@@ -69,11 +78,28 @@ public class ControllerCantidadAgua {
             MostrarCantidadAgua.getData().clear();
             MostrarCantidadAgua.getData().add(series);
         }
+	    
+	    @FXML
+        void initialize() {
+            List<Date> fechas = obtenerFechasDesdeSensores(listaSenAguaUser);
+
+            ObservableList<Date> fechasObservable = FXCollections.observableArrayList(fechas);
+            cmbFechas.setItems(fechasObservable);
+        }
+
+        private List<Date> obtenerFechasDesdeSensores(ArrayList<Sensor> sensores) {
+            return sensores.stream().map(Sensor::getFecha).collect(Collectors.toList());
+        }
+        
     	@FXML
         private double obtenerAgua() {
+    		Date fechaSeleccionada = cmbFechas.getValue();
             
-        	
-            return 500.0; 
+            // Buscar el sensor correspondiente
+            Optional<Sensor> sensorOptional = listaSenAguaUser.stream().filter(sensor -> sensor.getFecha().equals(fechaSeleccionada))
+                    .findFirst();
+
+            return sensorOptional.map(Sensor::getDato).orElse(0);
         }
 
     	

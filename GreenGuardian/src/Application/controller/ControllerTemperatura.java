@@ -8,6 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,6 +23,8 @@ import com.google.gson.reflect.TypeToken;
 import Application.model.Sensor;
 import Application.model.Session;
 import Application.model.Usuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +34,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -37,6 +43,9 @@ public class ControllerTemperatura {
 	
 	@FXML
     private Button VolverMenuPrin;
+	
+	@FXML
+    private ComboBox<Date> cmbFechas;
 	
 	@FXML
     private BarChart<String, Number> MostrarTemperatura;
@@ -85,10 +94,10 @@ public class ControllerTemperatura {
 			}
 	}
 
+	
    
     @FXML
     void MostrarTemperatura(ActionEvent event) {
-        // Suponiendo que tienes un método para obtener la temperatura actual
         double temperaturaActual = obtenerTemperatura();
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
@@ -97,11 +106,28 @@ public class ControllerTemperatura {
         MostrarTemperatura.getData().clear();
         MostrarTemperatura.getData().add(series);
     }
+    
+    @FXML
+    void initialize() {
+        List<Date> fechas = obtenerFechasDesdeSensores(listaSenTempUser);
+
+        ObservableList<Date> fechasObservable = FXCollections.observableArrayList(fechas);
+        cmbFechas.setItems(fechasObservable);
+    }
+
+    private List<Date> obtenerFechasDesdeSensores(ArrayList<Sensor> sensores) {
+        return sensores.stream().map(Sensor::getFecha).collect(Collectors.toList());
+    }
     @FXML
     private double obtenerTemperatura() {
+    	Date fechaSeleccionada = cmbFechas.getValue();
         
+        // Buscar el sensor correspondiente
+        Optional<Sensor> sensorOptional = listaSenTempUser.stream().filter(sensor -> sensor.getFecha().equals(fechaSeleccionada))
+                .findFirst();
+
+        return sensorOptional.map(Sensor::getDato).orElse(0);
     	
-        return 25.0; 
     }
     
     private ArrayList<Sensor> leerJson() {
