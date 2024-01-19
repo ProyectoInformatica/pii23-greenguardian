@@ -46,5 +46,29 @@
     "telf": "603541289",
     "contra": "123",
     "rol": "Técnico"
+  },
+  {
+    "nombre": "Oliver",
+    "apellido": "Reyes",
+    "dni": "14987550Z",
+    "telf": "682034961",
+    "contra": "hola",
+    "rol": "Cliente"
+  },
+  {
+    "nombre": "Laura",
+    "apellido": "Gomez",
+    "dni": "33511561D",
+    "telf": "603498562",
+    "contra": "123",
+    "rol": "Técnico"
+  },
+  {
+    "nombre": "Alfonso",
+    "apellido": "Perez",
+    "dni": "03635812H",
+    "telf": "684035967",
+    "contra": "abcde",
+    "rol": "Agricultor"
   }
 ]
