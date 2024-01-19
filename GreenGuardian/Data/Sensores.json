@@ -1,0 +1,50 @@
+[
+  {
+	"id" : "85138032J",
+	"tipoSensor" : "Temperatura",
+	"fecha" : "19/01/2024",
+	"dato" : 25
+   },
+   {
+  	"id" : "85138032J",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "18/01/2024",
+  	"dato" : 30
+   },
+   {
+  	"id" : "85138032J",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "17/01/2024",
+  	"dato" : 28
+   },
+   {
+  	"id" : "85138032J",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "19/01/2024",
+ 	"dato" : 60
+   },
+   {
+  	"id" : "85138032J",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "19/01/2024",
+  	"dato" : 40
+   },
+   {
+  	"id" : "32202166G",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "19/01/2024",
+  	"dato" : 80
+   },
+   {
+  	"id" : "32202166G",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "19/01/2024",
+  	"dato" : 18
+   },
+   {
+  	"id" : "32202166G",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "19/01/2024",
+  	"dato" : 26
+   }  
+]  

@@ -1,9 +1,6 @@
 package Application.controller;
 
-import java.io.FileWriter;
 import java.io.IOException;
-
-import com.google.gson.Gson;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,15 +56,26 @@ public class ControllerVTecnico {
 				e.printStackTrace();
 			}
 	    }
-	    public void guardarDatosEnJson() {
-	        Gson gson = new Gson();
-	        String json = gson.toJson(this);
-
-	        try (FileWriter file = new FileWriter("Data/Sensores.json")) {
-	            file.write(json);
-	            file.flush();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+	    
+	    @FXML
+	    void verSensores(ActionEvent event) {
+	    	try {
+	    		Node source = (Node) event.getSource();
+		    	Stage stage = (Stage) source.getScene().getWindow();    
+		    	stage.close();
+	    		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/ListaSensoresTecnico.fxml"));
+	    		ControllerListaSensoresTecnico control = new ControllerListaSensoresTecnico();
+	        	loader1.setController(control);
+				Parent root1 = loader1.load();
+				Stage stage1 = new Stage();
+				stage1.setScene(new Scene(root1));
+				stage1.initModality(Modality.WINDOW_MODAL);
+				stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+				stage1.show();
+					  
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	    }
 }

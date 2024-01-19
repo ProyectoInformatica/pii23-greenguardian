@@ -1,47 +1,41 @@
 package Application.model;
 
-import com.google.gson.Gson;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Sensor {
-    private double temperatura;
-    private String rol; // Agricultor, Tecnico, Cliente
-    private LocalDateTime horaUso;
-    private double humedad;
-    private double cantidadAgua;
-    
-    public Sensor(Double temperatura,Double humedad, Double cantidadAgua) {
-		this.rol = rol;
-		this.horaUso = LocalDateTime.now();		
-		this.temperatura = temperatura;
-		this.humedad = humedad;
-		this.cantidadAgua=cantidadAgua;
-   
-    }
-    public String toString() {
-    	String salida1 = "Sensores: ( "+temperatura+", "+humedad+", "+cantidadAgua+", "+horaUso+", "+rol+")";
-    	return salida1;
-    }
-    public double gettemperatura() {
-		return temperatura;
+	private String id;
+	private String tipoSensor;
+	private Date fecha;
+	private int dato;
+	
+	public Sensor(String id, String tipoSensor, Date fecha, int dato) {
+		this.id = id;
+		this.tipoSensor = tipoSensor;
+		this.fecha = fecha;
+		this.dato = dato;
 	}
 
-	public String getrol() {
-		return rol;
+	public String getId() {
+		return id;
 	}
-	
 
-	public LocalDateTime gethoraUso() {
-		return horaUso;
+	public String getTipoSensor() {
+		return tipoSensor;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public int getDato() {
+		return dato;
+	}
+
+	@Override
+	public String toString() {
+		return "Sensor [id=" + id + ", tipoSensor=" + tipoSensor + ", fecha=" + fecha + ", dato=" + dato + "]";
 	}
 	
-	public double gethumedad() {
-		return humedad;
-	}
 	
-	public double getcantidadAgua() {
-		return cantidadAgua;
-	}
+	
 }

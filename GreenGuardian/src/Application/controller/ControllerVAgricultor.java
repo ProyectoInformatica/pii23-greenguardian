@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import Application.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +40,11 @@ public class ControllerVAgricultor {
         lblNomVA.setText("Bienvenid@ "+text);
     }
 	
+	 public void recibirUsuario(Usuario usuario) {
+	        setLabelText(usuario.getNombre());
+	       
+	    }
+	 
 	@FXML
     void cerrarSesionVA(ActionEvent event) {
 

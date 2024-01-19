@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import Application.model.Session;
 import Application.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -106,6 +107,7 @@ public class Controller{
     			
     			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra()) & u1.getRol().equals("Cliente")) {
     				nombre = u1.getNombre();
+    				Session.setUsuarioActual(u1);
     				esCorrecto = true;
     				
     				 
@@ -135,6 +137,7 @@ public class Controller{
     			
     			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())& u1.getRol().equals("Agricultor")) {
     				nombre = u1.getNombre();
+    				Session.setUsuarioActual(u1);
     				esCorrecto = true;
     				
     				 
@@ -156,6 +159,7 @@ public class Controller{
     	    			stage1.show();
     	    			control.setLabelText(nombre);
     	    			
+    	    			
     	    		} catch (Exception e) {
     	    			e.printStackTrace();
     	    		}
@@ -164,6 +168,7 @@ public class Controller{
     			
     			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())& u1.getRol().equals("Técnico")) {
     				nombre = u1.getNombre();
+    				Session.setUsuarioActual(u1);
     				esCorrecto = true;
     				
     				 

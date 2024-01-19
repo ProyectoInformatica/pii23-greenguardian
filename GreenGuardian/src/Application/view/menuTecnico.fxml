@@ -36,7 +36,7 @@
             </Label>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="showSensores" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" text="Ver sensores" textFill="WHITE">
+                  <Button fx:id="showSensores" mnemonicParsing="false" onAction="#verSensores" prefHeight="33.0" prefWidth="211.0" text="Ver sensores" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />

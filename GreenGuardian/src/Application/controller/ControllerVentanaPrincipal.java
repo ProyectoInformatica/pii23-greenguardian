@@ -1,20 +1,22 @@
 package Application.controller;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
-import com.google.gson.Gson;
-
+import Application.model.Session;
+import Application.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ControllerVentanaPrincipal {
 	@FXML
@@ -38,20 +40,10 @@ public class ControllerVentanaPrincipal {
 	@FXML
 	private Button btnLogOutVP;
 	
-	public void guardarDatosEnJson() {
-        Gson gson = new Gson();
-        String json = gson.toJson(this);
-
-        try (FileWriter file = new FileWriter("/Data/Sensores.json")) {
-            file.write(json);
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	Usuario usuarioActual = Session.getUsuarioActual();
 	
 	public void setLabelText(String text) {
-        lblNomPagPrincipal.setText("Bienvenid@ "+text);
+		lblNomPagPrincipal.setText("Bienvenid@ "+usuarioActual.getNombre());
     }
 	
 	 @FXML
@@ -70,6 +62,7 @@ public class ControllerVentanaPrincipal {
 				stage1.initModality(Modality.WINDOW_MODAL);
 				stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
 				stage1.show();
+				
 	        	
 				
 			} catch (Exception e) {
@@ -139,6 +132,28 @@ public class ControllerVentanaPrincipal {
 				e.printStackTrace();
 			}
 	 	}
+	 
+	 @FXML
+	    void apagarRiego(ActionEvent event) {
+		 if(offRiegoAutomatico.getText().equals("Apagar riego automatico")) {
+			 	Alert dialogo1 = new Alert(AlertType.INFORMATION);
+		    	dialogo1.setTitle("Riego Automatico");
+		    	dialogo1.setHeaderText(null);
+		    	dialogo1.setContentText("Riego automatico apagado");
+		    	dialogo1.initStyle(StageStyle.UTILITY);
+		    	dialogo1.showAndWait();
+		    	offRiegoAutomatico.setText("Encender Riego automatico");
+		 }else {
+			 Alert dialogo1 = new Alert(AlertType.INFORMATION);
+		    	dialogo1.setTitle("Riego Automatico");
+		    	dialogo1.setHeaderText(null);
+		    	dialogo1.setContentText("Riego automatico encendido");
+		    	dialogo1.initStyle(StageStyle.UTILITY);
+		    	dialogo1.showAndWait();
+		    	offRiegoAutomatico.setText("Apagar riego automatico");
+		 }
+		 
+	    }
 	 
 	 }
 

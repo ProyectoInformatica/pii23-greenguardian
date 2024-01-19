@@ -50,7 +50,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="offRiegoAutomatico" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" text="Apagar riego automatico" textFill="WHITE">
+                  <Button fx:id="offRiegoAutomatico" mnemonicParsing="false" onAction="#apagarRiego" prefHeight="33.0" prefWidth="211.0" text="Apagar riego automatico" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />
