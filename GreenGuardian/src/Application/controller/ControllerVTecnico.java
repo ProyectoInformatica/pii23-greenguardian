@@ -35,6 +35,8 @@ public class ControllerVTecnico {
 	    @FXML
 	    private Button logOutTeccnico;
 	    
+	    private boolean reiniciarSensor = false;
+	    
 	    public void setLabelText(String text) {
 	        lblNomVT.setText("Bienvenid@ "+text);
 	    }
@@ -110,5 +112,16 @@ public class ControllerVTecnico {
 	            alert.setContentText("No se pudo recuperar la información del último feedback.");
 	            alert.showAndWait();
 	        }
+	    }
+	    @FXML
+	    void reiniciarSensores(ActionEvent event) {
+	        reiniciarSensor = !reiniciarSensor; 
+	        String mensaje = reiniciarSensor ? "Sensores reiniciados correctamente" : "Sensores reiniciados correctamente";
+
+	        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	        alert.setTitle("Reinicio de sensores");
+	        alert.setHeaderText(null);
+	        alert.setContentText(mensaje);
+	        alert.showAndWait();
 	    }
 }

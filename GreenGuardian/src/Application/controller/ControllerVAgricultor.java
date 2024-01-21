@@ -45,6 +45,8 @@ public class ControllerVAgricultor {
     private Button LogOutSob;
 
     private boolean riegoAutomaticoActivo = false; 
+    
+    
 
 
     public void setLabelText(String text) {

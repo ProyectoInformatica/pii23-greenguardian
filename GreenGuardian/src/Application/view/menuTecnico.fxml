@@ -49,7 +49,7 @@
                         <Insets right="150.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="reiniciarSensores" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" text="Reiniciar sensores" textFill="WHITE">
+                  <Button fx:id="reiniciarSensores" mnemonicParsing="false" onAction="#reiniciarSensores" prefHeight="33.0" prefWidth="211.0" text="Reiniciar sensores" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />
