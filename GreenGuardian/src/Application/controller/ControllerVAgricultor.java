@@ -1,9 +1,15 @@
 package Application.controller;
+import Application.model.RegistroFeedback;
+import Application.model.Session;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,12 +21,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public class ControllerVAgricultor {
+public class ControllerVAgricultor{
 	@FXML
     private Label lblNomVA;
 
@@ -81,5 +90,50 @@ public class ControllerVAgricultor {
 	            e.printStackTrace();
 	        }
 	    }
+	    @FXML
+	    void onRiegoManualClickedAgri(ActionEvent event) {
+	    	if(riegoManualSob.getText().equals("Apagar riego manual")) {
+			 	Alert dialogo1 = new Alert(AlertType.INFORMATION);
+		    	dialogo1.setTitle("Riego manual");
+		    	dialogo1.setHeaderText(null);
+		    	dialogo1.setContentText("Riego manual apagado");
+		    	dialogo1.initStyle(StageStyle.UTILITY);
+		    	dialogo1.showAndWait();
+		    	riegoManualSob.setText("Encender Riego manual");
+		 }else {
+			 Alert dialogo1 = new Alert(AlertType.INFORMATION);
+		    	dialogo1.setTitle("Riego manual");
+		    	dialogo1.setHeaderText(null);
+		    	dialogo1.setContentText("Riego manual encendido");
+		    	dialogo1.initStyle(StageStyle.UTILITY);
+		    	dialogo1.showAndWait();
+		    	riegoManualSob.setText("Apagar riego manual");
+		 }
+	    	
+	    	
+	        LocalDateTime now = LocalDateTime.now();
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        String formattedDateTime = now.format(formatter);
+
+	        Usuario usuarioActual = Session.getUsuarioActual();
+	        String userName = usuarioActual.getNombre();
+
+	        guardarFeedback(formattedDateTime, userName);
+	        
+	    }
 	    
+
+	    private void guardarFeedback(String fechaHora, String usuario) {
+	        Gson gson = new Gson();
+	        
+	        // Crear un nuevo registro con la fecha y hora actual y el nombre del usuario
+	        RegistroFeedback nuevoRegistro = new RegistroFeedback(fechaHora, usuario);
+
+	        // Sobrescribir el archivo Feedback.json con el nuevo registro
+	        try (FileWriter writer = new FileWriter("Data/Feedback.json")) {
+	            gson.toJson(nuevoRegistro, writer);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
 }

@@ -70,5 +70,29 @@
     "telf": "684035967",
     "contra": "abcde",
     "rol": "Agricultor"
+  },
+  {
+    "nombre": "lol",
+    "apellido": "lol",
+    "dni": "11111111h",
+    "telf": "444444444",
+    "contra": "1",
+    "rol": "Cliente"
+  },
+  {
+    "nombre": "p",
+    "apellido": "p",
+    "dni": "12345678z",
+    "telf": "777777777",
+    "contra": "p",
+    "rol": "Agricultor"
+  },
+  {
+    "nombre": "q",
+    "apellido": "q",
+    "dni": "67299862E",
+    "telf": "888888888",
+    "contra": "q",
+    "rol": "Técnico"
   }
 ]

@@ -1,7 +1,13 @@
 package Application.controller;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+import com.google.gson.Gson;
+
+import Application.model.RegistroFeedback;
 import Application.model.Session;
 import Application.model.Usuario;
 import javafx.event.ActionEvent;
@@ -153,6 +159,54 @@ public class ControllerVentanaPrincipal {
 		    	offRiegoAutomatico.setText("Apagar riego automatico");
 		 }
 		 
+	    }
+	 	@FXML
+	    void onRiegoManualClickedPrin(ActionEvent event) {
+	 		if(riegoManual.getText().equals("Apagar riego manual")) {
+			 	Alert dialogo1 = new Alert(AlertType.INFORMATION);
+		    	dialogo1.setTitle("Riego manual");
+		    	dialogo1.setHeaderText(null);
+		    	dialogo1.setContentText("Riego manual apagado");
+		    	dialogo1.initStyle(StageStyle.UTILITY);
+		    	dialogo1.showAndWait();
+		    	riegoManual.setText("Encender Riego manual");
+		 }else {
+			 Alert dialogo1 = new Alert(AlertType.INFORMATION);
+		    	dialogo1.setTitle("Riego manual");
+		    	dialogo1.setHeaderText(null);
+		    	dialogo1.setContentText("Riego manual encendido");
+		    	dialogo1.initStyle(StageStyle.UTILITY);
+		    	dialogo1.showAndWait();
+		    	riegoManual.setText("Apagar riego manual");
+		 }
+	        LocalDateTime now = LocalDateTime.now();
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        String formattedDateTime = now.format(formatter);
+
+	        Usuario usuarioActual = Session.getUsuarioActual();
+	        String userName = usuarioActual.getNombre();
+
+	        guardarFeedback(formattedDateTime, userName);
+	        Alert alert = new Alert(AlertType.WARNING);
+         alert.setTitle("Advertencia");
+         alert.setHeaderText(null);
+         alert.setContentText("Se ha guardado correctamente");
+         alert.showAndWait();
+	    }
+	    
+
+	    private void guardarFeedback(String fechaHora, String usuario) {
+	        Gson gson = new Gson();
+	        
+	        // Crear un nuevo registro con la fecha y hora actual y el nombre del usuario
+	        RegistroFeedback nuevoRegistro = new RegistroFeedback(fechaHora, usuario);
+
+	        // Sobrescribir el archivo Feedback.json con el nuevo registro
+	        try (FileWriter writer = new FileWriter("Data/Feedback.json")) {
+	            gson.toJson(nuevoRegistro, writer);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
 	    }
 	 
 	 }

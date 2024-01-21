@@ -49,7 +49,7 @@
                         <Insets right="150.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="riegoManualSob" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" text="Riego Manual" textFill="WHITE">
+                  <Button fx:id="riegoManualSob" mnemonicParsing="false" onAction="#onRiegoManualClickedAgri" prefHeight="33.0" prefWidth="211.0" text="Riego Manual" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />

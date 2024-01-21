@@ -1,13 +1,18 @@
 package Application.controller;
 
+import java.io.FileReader;
 import java.io.IOException;
 
+import com.google.gson.Gson;
+
+import Application.model.RegistroFeedback;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
@@ -77,5 +82,33 @@ public class ControllerVTecnico {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+	    }
+	    private RegistroFeedback leerUltimoFeedback() {
+	        Gson gson = new Gson();
+	        try (FileReader reader = new FileReader("Data/Feedback.json")) {
+	            return gson.fromJson(reader, RegistroFeedback.class);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	    }
+	    @FXML
+	    void verFeedback(ActionEvent event) {
+	        RegistroFeedback ultimoFeedback = leerUltimoFeedback();
+	        if (ultimoFeedback != null) {
+	            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	            alert.setTitle("Información de Último Feedback");
+	            alert.setHeaderText(null);
+	            alert.setContentText("El último usuario ha sido: " + ultimoFeedback.getUsuario() +
+	                                 " a las " + ultimoFeedback.getFechaHora());
+	            alert.showAndWait();
+	        } else {
+	            // Manejar el caso en que no se encuentre información o haya un error
+	            Alert alert = new Alert(Alert.AlertType.ERROR);
+	            alert.setTitle("Error");
+	            alert.setHeaderText(null);
+	            alert.setContentText("No se pudo recuperar la información del último feedback.");
+	            alert.showAndWait();
+	        }
 	    }
 }
