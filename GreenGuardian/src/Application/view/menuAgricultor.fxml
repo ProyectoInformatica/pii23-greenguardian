@@ -36,7 +36,7 @@
             </Label>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="historialSob" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" text="Historial" textFill="WHITE">
+                  <Button fx:id="riegoA" mnemonicParsing="false" onAction="#riegoAutomatico" prefHeight="33.0" prefWidth="211.0" text="Riego Automatico" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />
@@ -63,7 +63,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="manualsob" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" text="Manual" textFill="WHITE">
+                  <Button fx:id="manualsob" mnemonicParsing="false" onAction="#manualVentana" prefHeight="33.0" prefWidth="211.0" text="Manual" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />
