@@ -16,6 +16,15 @@
    <children>
       <VBox alignment="CENTER" layoutX="14.0" layoutY="66.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="TOP" text="MENU CLIENTE">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
             <ImageView fitHeight="94.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Img/LogoGG.png" />

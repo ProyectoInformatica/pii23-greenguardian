@@ -16,6 +16,15 @@
    <children>
       <VBox alignment="CENTER" layoutX="14.0" layoutY="66.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="TOP" text="MENU AGRICULTOR">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
             <ImageView fitHeight="94.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Img/LogoGG.png" />
@@ -73,21 +82,21 @@
                         <String fx:value="bordes" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets right="150.0" />
+                        <Insets />
                      </HBox.margin>
-                  </Button>
-                  <Button fx:id="LogOutSob" mnemonicParsing="false" onAction="#cerrarSesionVA" prefHeight="33.0" prefWidth="211.0" text="Log Out" textFill="WHITE">
-                     <stylesheets>
-                        <URL value="@Botones.css" />
-                        <URL value="@Bordes.css" />
-                     </stylesheets>
-                     <styleClass>
-                        <String fx:value="botones" />
-                        <String fx:value="bordes" />
-                     </styleClass>
                   </Button>
                </children>
             </HBox>
+            <Button fx:id="LogOutSob" mnemonicParsing="false" onAction="#cerrarSesionVA" prefHeight="33.0" prefWidth="211.0" text="Log Out" textFill="WHITE">
+               <stylesheets>
+                  <URL value="@Botones.css" />
+                  <URL value="@Bordes.css" />
+               </stylesheets>
+               <styleClass>
+                  <String fx:value="botones" />
+                  <String fx:value="bordes" />
+               </styleClass>
+            </Button>
          </children>
          <padding>
             <Insets left="100.0" right="100.0" />
