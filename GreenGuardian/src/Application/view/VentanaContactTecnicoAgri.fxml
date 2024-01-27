@@ -32,21 +32,21 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Label fx:id="lblNombre" text="Nombre del técnico: " textFill="#115a51">
+                  <Label fx:id="lblNombreAgri" text="Nombre del técnico: " textFill="#115a51">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <Label fx:id="lblTelefono" text="Teléfono: " textFill="#115a51">
+            <Label fx:id="lblTelefonoAgri" text="Teléfono: " textFill="#115a51">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#volverMenu" prefHeight="31.0" prefWidth="99.0" text="Volver" textFill="WHITE">
+                  <Button fx:id="btnVolverAgri" mnemonicParsing="false" onAction="#volverMenuAgri" prefHeight="31.0" prefWidth="99.0" text="Volver" textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />
                         <URL value="@Bordes.css" />

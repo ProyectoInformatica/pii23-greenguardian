@@ -2,7 +2,7 @@ package Application.model;
 
 public class Session {
 	    private static Usuario usuarioActual;
-
+	    
 	    public static Usuario getUsuarioActual() {
 	        return usuarioActual;
 	    }
@@ -10,5 +10,4 @@ public class Session {
 	    public static void setUsuarioActual(Usuario usuario) {
 	        usuarioActual = usuario;
 	    }
-	
 }

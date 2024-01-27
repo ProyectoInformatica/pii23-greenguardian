@@ -12,6 +12,7 @@ public class Usuario {
 	private String contra;
 	private String rol;
 	private Usuario tecnicoAsig;
+	private Usuario tecnicoAsigDos;
 	private List<Usuario> clientesAsignados;
 	
 	public Usuario(String nombre, String apellido, String dni, String telf, String contra, String rol) {
@@ -23,9 +24,10 @@ public class Usuario {
 		this.rol = rol;
 	}
 	//Contrucor para el cliente
-	public Usuario(String nombre, String apellido, String dni, String telf, String contra, String rol, Usuario tecnicoAsig) {
+	public Usuario(String nombre, String apellido, String dni, String telf, String contra, String rol, Usuario tecnicoAsig, Usuario tecnicoAsigDos) {
         this(nombre, apellido, dni, telf, contra, rol);
         this.tecnicoAsig = tecnicoAsig;
+        this.tecnicoAsigDos = tecnicoAsigDos;
     }
 	
 	//Constructor para el tecnico
@@ -69,6 +71,10 @@ public class Usuario {
 
 	public Usuario getTecnicoAsignado() {
 	    return tecnicoAsig;
+	}
+	
+	public Usuario getTecnicoAsignadoDos() {
+	    return tecnicoAsigDos;
 	}
 	
 	public List<Usuario> getClientesAsignados() {

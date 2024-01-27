@@ -15,26 +15,27 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ControllerVentanaContactTec {
+public class ControllerVentanaContactTecAgri {
 	@FXML
-    private Label lblNombre;
+    private Label lblNombreAgri;
 
     @FXML
-    private Label lblTelefono;
+    private Label lblTelefonoAgri;
 
     @FXML
-    private Button btnVolver;
+    private Button btnVolverAgri;
+
     
     Usuario usuarioActual = Session.getUsuarioActual();
 
     @FXML
-    void volverMenu(ActionEvent event) {
+    void volverMenuAgri(ActionEvent event) {
     	try {
     		Node source = (Node) event.getSource();
 	    	Stage stage = (Stage) source.getScene().getWindow();    
 	    	stage.close();
-    		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/menuPrincipal.fxml"));
-    		ControllerVentanaPrincipal control = new ControllerVentanaPrincipal();
+    		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/menuAgricultor.fxml"));
+    		ControllerVAgricultor control = new ControllerVAgricultor();
         	loader1.setController(control);
 			Parent root1 = loader1.load();
 			Stage stage1 = new Stage();
@@ -51,12 +52,12 @@ public class ControllerVentanaContactTec {
     	
     }
     public void setLabelNombre(String nombre, String apellido) {
-        lblNombre.setText("Nombre Técnico Asignado 1: " + nombre + " " + apellido);
+        lblNombreAgri.setText("Nombre Técnico Asignado 1: " + nombre + " " + apellido);
     }
 
 
 	public void setLabelTelf(String telf) {
-		lblTelefono.setText("Teléfono 1: "+telf);
+		lblTelefonoAgri.setText("Teléfono 1: "+telf);
 		
 	}
 }

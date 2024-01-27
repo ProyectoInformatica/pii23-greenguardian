@@ -20,6 +20,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -34,6 +35,9 @@ public class ControllerVAgricultor {
 
     @FXML
     private Button riegoManualSob;
+    
+    @FXML
+    private Button BtnVAgri;
 
     @FXML
     private Button manualsob;
@@ -46,7 +50,7 @@ public class ControllerVAgricultor {
 
     private boolean riegoAutomaticoActivo = false; 
     
-    
+	Usuario usuarioActual = Session.getUsuarioActual();
 
 
     public void setLabelText(String text) {
@@ -120,6 +124,29 @@ public class ControllerVAgricultor {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+    
+    @FXML
+    void abrirVentanaContactAgri(ActionEvent event) {
+    	try {
+    		Node source = (Node) event.getSource();
+	    	Stage stage = (Stage) source.getScene().getWindow();    
+	    	stage.close();
+    		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/VentanaContactTecnicoAgri.fxml"));
+    		ControllerVentanaContactTecAgri control = new ControllerVentanaContactTecAgri();
+        	loader1.setController(control);
+			Parent root1 = loader1.load();
+			Stage stage1 = new Stage();
+			stage1.setScene(new Scene(root1));
+			stage1.initModality(Modality.WINDOW_MODAL);
+			stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+			stage1.show();
+			control.setLabelNombre(usuarioActual.getTecnicoAsignado().getNombre(), usuarioActual.getTecnicoAsignado().getApellido());	
+			control.setLabelTelf(usuarioActual.getTecnicoAsignado().getTelf());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML

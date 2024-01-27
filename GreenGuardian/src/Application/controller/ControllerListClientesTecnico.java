@@ -40,7 +40,7 @@ public class ControllerListClientesTecnico {
     private Button btnVolver;
     
     Usuario usuarioActual = Session.getUsuarioActual();
-    
+
     @FXML
     void initialize() {
         ColNom.setCellValueFactory(new PropertyValueFactory<>("nombre"));

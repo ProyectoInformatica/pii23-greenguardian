@@ -51,7 +51,7 @@ public class ControllerVentanaPrincipal {
 	private Button btnLogOutVP;
 	
 	Usuario usuarioActual = Session.getUsuarioActual();
-	
+
 	public void setLabelText(String text) {
 		lblNomPagPrincipal.setText("Bienvenid@ "+usuarioActual.getNombre());
     }
@@ -228,9 +228,8 @@ public class ControllerVentanaPrincipal {
 				stage1.initModality(Modality.WINDOW_MODAL);
 				stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
 				stage1.show();
-				control.setLabelNombre(usuarioActual.getTecnicoAsignado().getNombre(), usuarioActual.getTecnicoAsignado().getApellido());
-				control.setLabelTelf(usuarioActual.getTecnicoAsignado().getTelf());
-					  
+				control.setLabelNombre(usuarioActual.getTecnicoAsignado().getNombre(), usuarioActual.getTecnicoAsignado().getApellido());	
+				control.setLabelTelf(usuarioActual.getTecnicoAsignado().getTelf());  
 				
 			} catch (IOException e) {
 				e.printStackTrace();

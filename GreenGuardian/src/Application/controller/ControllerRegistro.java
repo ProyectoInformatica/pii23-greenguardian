@@ -193,8 +193,9 @@ public class ControllerRegistro implements Initializable{
     	if(selectedRole.equals("Cliente")) {
     		Random random = new Random();
     	    Usuario tecnicoAsignado = listaTecnicos.get(random.nextInt(listaTecnicos.size()));
+    	    Usuario tecnicoAsignadoDos = listaTecnicos.get(random.nextInt(listaTecnicos.size()));
     	    
-    	    Usuario u = new Usuario(nombre, apellido, dni, telf, contra, selectedRole, tecnicoAsignado);
+    	    Usuario u = new Usuario(nombre, apellido, dni, telf, contra, selectedRole, tecnicoAsignado, tecnicoAsignadoDos);
     	    
     	    //TODO: Hay que revisar el error de esta linea
     	    //tecnicoAsignado.agregarClienteAsignado(u);
@@ -207,6 +208,19 @@ public class ControllerRegistro implements Initializable{
     		// Añadir el técnico a la lista de usuarios
     	    listaUsuarios.add(u);
     	    
+    	    // Añadir lista de usuarios al Json
+    	    escribirJson(listaUsuarios);
+    	}else if(selectedRole.equals("Agricultor")) {
+    		Random random = new Random();
+    	    Usuario tecnicoAsignado = listaTecnicos.get(random.nextInt(listaTecnicos.size()));
+    	    Usuario tecnicoAsignadoDos = listaTecnicos.get(random.nextInt(listaTecnicos.size()));
+    	    
+    	    Usuario u = new Usuario(nombre, apellido, dni, telf, contra, selectedRole, tecnicoAsignado, tecnicoAsignadoDos);
+    	    
+    	    //TODO: Hay que revisar el error de esta linea
+    	    //tecnicoAsignado.agregarClienteAsignado(u);
+    	    
+    	    listaUsuarios.add(u);
     	    // Añadir lista de usuarios al Json
     	    escribirJson(listaUsuarios);
     	}else{
