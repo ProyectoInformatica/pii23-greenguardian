@@ -173,7 +173,7 @@ public class Controller{
     				
     				 
     				
-    	        	//Cerrar InicioSesion y abrir ventana principal(Provisional hasta añadir los roles)
+    	        	//Cerrar InicioSesion y abrir ventana principal
     	        	try {
     	        		Node source = (Node) event.getSource();
     	            	Stage stage = (Stage) source.getScene().getWindow();    

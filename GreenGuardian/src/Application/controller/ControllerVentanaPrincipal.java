@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,6 +28,9 @@ import javafx.stage.StageStyle;
 public class ControllerVentanaPrincipal {
 	@FXML
 	private Label lblNomPagPrincipal;
+	
+	@FXML
+    private Label lblContactar;
 	
 	@FXML
 	private Button cantidadAgua;
@@ -207,6 +211,30 @@ public class ControllerVentanaPrincipal {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
+	    }
+	    
+	    @FXML
+	    void abrirVentanaContact(MouseEvent event) {
+	    	try {
+	    		Node source = (Node) event.getSource();
+		    	Stage stage = (Stage) source.getScene().getWindow();    
+		    	stage.close();
+	    		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/VentanaContactTecnico.fxml"));
+	    		ControllerVentanaContactTec control = new ControllerVentanaContactTec();
+	        	loader1.setController(control);
+				Parent root1 = loader1.load();
+				Stage stage1 = new Stage();
+				stage1.setScene(new Scene(root1));
+				stage1.initModality(Modality.WINDOW_MODAL);
+				stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+				stage1.show();
+				control.setLabelNombre(usuarioActual.getTecnicoAsignado().getNombre(), usuarioActual.getTecnicoAsignado().getApellido());
+				control.setLabelTelf(usuarioActual.getTecnicoAsignado().getTelf());
+					  
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	    }
 	 
 	 }

@@ -256,5 +256,539 @@
   	"tipoSensor" : "Agua",
   	"fecha" : "19/01/2024",
   	"dato" : 26
-   }  
+   },
+   {
+	"id" : "52615242M",
+	"tipoSensor" : "Temperatura",
+	"fecha" : "19/01/2024",
+	"dato" : 25
+   },
+   {
+  	"id" : "52615242M",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "18/01/2024",
+  	"dato" : 30
+   },
+   {
+  	"id" : "52615242M",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "17/01/2024",
+  	"dato" : 28
+   },
+   {
+  	"id" : "52615242M",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "16/01/2024",
+  	"dato" : 15
+   },
+   {
+  	"id" : "52615242M",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "14/01/2024",
+  	"dato" : 12
+   },
+   {
+  	"id" : "52615242M",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "19/01/2024",
+ 	"dato" : 60
+   },
+   {
+  	"id" : "52615242M",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "18/01/2024",
+ 	"dato" : 53
+   },
+   {
+  	"id" : "52615242M",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "17/01/2024",
+ 	"dato" : 47
+   },
+   {
+  	"id" : "52615242M",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "19/01/2024",
+  	"dato" : 40
+   },
+   {
+  	"id" : "52615242M",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "18/01/2024",
+  	"dato" : 34
+   },
+   {
+  	"id" : "52615242M",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "17/01/2024",
+  	"dato" : 39
+   },
+   {
+	"id" : "92872682Q",
+	"tipoSensor" : "Temperatura",
+	"fecha" : "19/01/2024",
+	"dato" : 2
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "18/01/2024",
+  	"dato" : 7
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "17/01/2024",
+  	"dato" : 4
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "16/01/2024",
+  	"dato" : 12
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "15/01/2024",
+  	"dato" : 16
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "19/01/2024",
+ 	"dato" : 64
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "18/01/2024",
+ 	"dato" : 60
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "17/01/2024",
+ 	"dato" : 57
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "16/01/2024",
+ 	"dato" : 59
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "19/01/2024",
+  	"dato" : 38
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "18/01/2024",
+  	"dato" : 43
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "17/01/2024",
+  	"dato" : 38
+   },
+   {
+  	"id" : "92872682Q",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "16/01/2024",
+  	"dato" : 34
+   },
+   {
+	"id" : "65541981P",
+	"tipoSensor" : "Temperatura",
+	"fecha" : "19/01/2024",
+	"dato" : 16
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "18/01/2024",
+  	"dato" : 21
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "17/01/2024",
+  	"dato" : 4
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "16/01/2024",
+  	"dato" : 7
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "15/01/2024",
+  	"dato" : 9
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "19/01/2024",
+ 	"dato" : 70
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "18/01/2024",
+ 	"dato" : 63
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "17/01/2024",
+ 	"dato" : 57
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "16/01/2024",
+ 	"dato" : 62
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "19/01/2024",
+  	"dato" : 36
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "18/01/2024",
+  	"dato" : 41
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "17/01/2024",
+  	"dato" : 38
+   },
+   {
+  	"id" : "65541981P",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "16/01/2024",
+  	"dato" : 27
+   },
+   {
+	"id" : "02949495K",
+	"tipoSensor" : "Temperatura",
+	"fecha" : "19/01/2024",
+	"dato" : 4
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "18/01/2024",
+  	"dato" : 10
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "17/01/2024",
+  	"dato" : 5
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "16/01/2024",
+  	"dato" : 12
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "15/01/2024",
+  	"dato" : 9
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "19/01/2024",
+ 	"dato" : 60
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "18/01/2024",
+ 	"dato" : 57
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "17/01/2024",
+ 	"dato" : 55
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "16/01/2024",
+ 	"dato" : 47
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "19/01/2024",
+  	"dato" : 38
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "18/01/2024",
+  	"dato" : 42
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "17/01/2024",
+  	"dato" : 36
+   },
+   {
+  	"id" : "02949495K",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "16/01/2024",
+  	"dato" : 37
+   },
+   {
+	"id" : "19006166R",
+	"tipoSensor" : "Temperatura",
+	"fecha" : "19/01/2024",
+	"dato" : 16
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "18/01/2024",
+  	"dato" : 21
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "17/01/2024",
+  	"dato" : 4
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "16/01/2024",
+  	"dato" : 7
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "15/01/2024",
+  	"dato" : 9
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "19/01/2024",
+ 	"dato" : 70
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "18/01/2024",
+ 	"dato" : 63
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "17/01/2024",
+ 	"dato" : 57
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "16/01/2024",
+ 	"dato" : 62
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "19/01/2024",
+  	"dato" : 36
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "18/01/2024",
+  	"dato" : 41
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "17/01/2024",
+  	"dato" : 38
+   },
+   {
+  	"id" : "19006166R",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "16/01/2024",
+  	"dato" : 27
+   },
+   {
+	"id" : "82258505V",
+	"tipoSensor" : "Temperatura",
+	"fecha" : "19/01/2024",
+	"dato" : 6
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "18/01/2024",
+  	"dato" : 7
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "17/01/2024",
+  	"dato" : 5
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "16/01/2024",
+  	"dato" : 12
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "15/01/2024",
+  	"dato" : 15
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "19/01/2024",
+ 	"dato" : 61
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "18/01/2024",
+ 	"dato" : 67
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "17/01/2024",
+ 	"dato" : 62
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "16/01/2024",
+ 	"dato" : 59
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "19/01/2024",
+  	"dato" : 39
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "18/01/2024",
+  	"dato" : 43
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "17/01/2024",
+  	"dato" : 36
+   },
+   {
+  	"id" : "82258505V",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "16/01/2024",
+  	"dato" : 35
+   },
+   {
+	"id" : "01063373Z",
+	"tipoSensor" : "Temperatura",
+	"fecha" : "19/01/2024",
+	"dato" : 14
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "18/01/2024",
+  	"dato" : 17
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "17/01/2024",
+  	"dato" : 13
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "16/01/2024",
+  	"dato" : 10
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Temperatura",
+  	"fecha" : "15/01/2024",
+  	"dato" : 9
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "19/01/2024",
+ 	"dato" : 68
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "18/01/2024",
+ 	"dato" : 63
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "17/01/2024",
+ 	"dato" : 59
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Humedad",
+  	"fecha" : "16/01/2024",
+ 	"dato" : 64
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "19/01/2024",
+  	"dato" : 39
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "18/01/2024",
+  	"dato" : 41
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "17/01/2024",
+  	"dato" : 36
+   },
+   {
+  	"id" : "01063373Z",
+  	"tipoSensor" : "Agua",
+  	"fecha" : "16/01/2024",
+  	"dato" : 28
+   }
 ]  

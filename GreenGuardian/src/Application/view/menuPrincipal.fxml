@@ -30,7 +30,7 @@
                   <Image url="@../../../Img/LogoGG.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblNomPagPrincipal" alignment="CENTER" contentDisplay="TOP" prefHeight="33.0" prefWidth="211.0" text="Bienvenido (nombre)" textFill="#115a51">
+            <Label fx:id="lblNomPagPrincipal" alignment="CENTER" contentDisplay="TOP" prefHeight="33.0" prefWidth="302.0" text="Bienvenido (nombre)" textFill="#115a51">
                <stylesheets>
                   <URL value="@Bordes.css" />
                   <URL value="@Label.css" />
@@ -114,6 +114,11 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
+                  <Label fx:id="lblContactar" alignment="TOP_LEFT" onMouseClicked="#abrirVentanaContact" text="Datos de su técnico" textFill="#115a51">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
                   <Button fx:id="btnLogOutVP" mnemonicParsing="false" onAction="#cerrarSesionVP" prefHeight="33.0" prefWidth="107.0" text="Log out " textFill="WHITE">
                      <stylesheets>
                         <URL value="@Botones.css" />

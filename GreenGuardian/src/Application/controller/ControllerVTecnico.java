@@ -35,7 +35,11 @@ public class ControllerVTecnico {
 	    @FXML
 	    private Button logOutTeccnico;
 	    
+	    @FXML
+	    private Button btnClientes;
+	    
 	    private boolean reiniciarSensor = false;
+	    
 	    
 	    public void setLabelText(String text) {
 	        lblNomVT.setText("Bienvenid@ "+text);
@@ -63,6 +67,7 @@ public class ControllerVTecnico {
 				e.printStackTrace();
 			}
 	    }
+	    
 	    
 	    @FXML
 	    void verSensores(ActionEvent event) {
@@ -123,5 +128,27 @@ public class ControllerVTecnico {
 	        alert.setHeaderText(null);
 	        alert.setContentText(mensaje);
 	        alert.showAndWait();
+	    }
+	    
+	    @FXML
+	    void verClientes(ActionEvent event) {
+	    	try {
+	    		Node source = (Node) event.getSource();
+		    	Stage stage = (Stage) source.getScene().getWindow();    
+		    	stage.close();
+	    		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/ListaClientesTecnico.fxml"));
+	    		ControllerListClientesTecnico control = new ControllerListClientesTecnico();
+	        	loader1.setController(control);
+				Parent root1 = loader1.load();
+				Stage stage1 = new Stage();
+				stage1.setScene(new Scene(root1));
+				stage1.initModality(Modality.WINDOW_MODAL);
+				stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+				stage1.show();
+					  
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	    }
 }

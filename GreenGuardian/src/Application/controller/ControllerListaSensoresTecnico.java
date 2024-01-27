@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +28,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -65,7 +67,38 @@ public class ControllerListaSensoresTecnico {
         ColFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         ColDato.setCellValueFactory(new PropertyValueFactory<>("dato"));
      
-        tblSensores.setItems(FXCollections.observableArrayList(listSen));
+        if (usuarioActual != null && usuarioActual.getRol().equals("Técnico")) {
+            List<Usuario> clientesAsignados = usuarioActual.getClientesAsignados();
+
+            if (clientesAsignados != null) {
+                // Filtrar los sensores por los clientes asignados al técnico
+                ArrayList<Sensor> sensoresFiltrados = new ArrayList<>();
+                for (Sensor sensor : listSen) {
+                    for (Usuario cliente : clientesAsignados) {
+                        if (cliente.getDni().equals(sensor.getId())) {
+                            sensoresFiltrados.add(sensor);
+                            break; // No necesitamos seguir verificando otros clientes
+                        }
+                    }
+                }
+
+                tblSensores.setItems(FXCollections.observableArrayList(sensoresFiltrados));
+            } else {
+                // Si el técnico no tiene clientes asignados, mostrar un mensaje o hacer algo según tus necesidades
+            	mostrarAlerta("Información", "El técnico no tiene clientes asignados.");
+            }
+        } else {
+            // Manejar el caso en que no se pueda obtener la información del técnico
+        	mostrarAlerta("Error", "No se pudo obtener la información del técnico.");
+        }
+    }
+    
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
     @FXML

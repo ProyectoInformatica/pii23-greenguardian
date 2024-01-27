@@ -5,7 +5,15 @@
     "dni": "85138032J",
     "telf": "678230148",
     "contra": "hola",
-    "rol": "Cliente"
+    "rol": "Cliente",
+    "tecnicoAsig": {
+      "nombre": "Luis",
+      "apellido": "Peralta",
+      "dni": "61166669D",
+      "telf": "603541289",
+      "contra": "123",
+      "rol": "Técnico"
+    }
   },
   {
     "nombre": "Clara",
@@ -21,7 +29,73 @@
     "dni": "77281963P",
     "telf": "658103575",
     "contra": "123",
-    "rol": "Técnico"
+    "rol": "Técnico",
+    "clientesAsignados": [
+      {
+        "nombre": "Alejandro",
+        "apellido": "Castro",
+        "dni": "52615242M",
+        "telf": "621015478",
+        "contra": "hola",
+        "rol": "Cliente",
+        "tecnicoAsig": {
+          "nombre": "Antonio",
+          "apellido": "Ortiz",
+          "dni": "77281963P",
+          "telf": "658103575",
+          "contra": "123",
+          "rol": "Técnico"
+        }
+      },
+      {
+        "nombre": "Alejandro",
+        "apellido": "Ramirez",
+        "dni": "01063373Z",
+        "telf": "605828068",
+        "contra": "hola",
+        "rol": "Cliente",
+        "tecnicoAsig": {
+          "nombre": "Antonio",
+          "apellido": "Ortiz",
+          "dni": "77281963P",
+          "telf": "658103575",
+          "contra": "123",
+          "rol": "Técnico"
+        }
+      },
+      {
+        "nombre": "Laura",
+        "apellido": "Sanchez",
+        "dni": "19006166R",
+        "telf": "698456218",
+        "contra": "hola",
+        "rol": "Cliente",
+        "tecnicoAsig": {
+          "nombre": "Antonio",
+          "apellido": "Ortiz",
+          "dni": "77281963P",
+          "telf": "658103575",
+          "contra": "123",
+          "rol": "Técnico"
+        }
+      },
+      {
+        "nombre": "Marta",
+        "apellido": "Gonzalez",
+        "dni": "92872682Q",
+        "telf": "684201503",
+        "contra": "hola",
+        "rol": "Cliente",
+        "tecnicoAsig": {
+          "nombre": "Antonio",
+          "apellido": "Ortiz",
+          "dni": "77281963P",
+          "telf": "658103575",
+          "contra": "123",
+          "rol": "Técnico"
+        }
+      }
+    ]
   },
   {
     "nombre": "Jesus",
@@ -29,7 +103,15 @@
     "dni": "33805160J",
     "telf": "603547982",
     "contra": "hola",
-    "rol": "Cliente"
+    "rol": "Cliente",
+    "tecnicoAsig": {
+      "nombre": "Laura",
+      "apellido": "Gomez",
+      "dni": "33511561D",
+      "telf": "603498562",
+      "contra": "123",
+      "rol": "Técnico"
+    }
   },
   {
     "nombre": "Javier",
@@ -45,7 +127,41 @@
     "dni": "61166669D",
     "telf": "603541289",
     "contra": "123",
-    "rol": "Técnico"
+    "rol": "Técnico",
+    "clientesAsignados": [
+      {
+        "nombre": "Nicole",
+        "apellido": "Alvarez",
+        "dni": "85138032J",
+        "telf": "678230148",
+        "contra": "hola",
+        "rol": "Cliente",
+        "tecnicoAsig": {
+          "nombre": "Luis",
+          "apellido": "Peralta",
+          "dni": "61166669D",
+          "telf": "603541289",
+          "contra": "123",
+          "rol": "Técnico"
+        }
+      },
+      {
+        "nombre": "Carlos",
+        "apellido": "Rodrigez",
+        "dni": "82258505V",
+        "telf": "629529515",
+        "contra": "hola",
+        "rol": "Cliente",
+        "tecnicoAsig": {
+          "nombre": "Luis",
+          "apellido": "Peralta",
+          "dni": "61166669D",
+          "telf": "603541289",
+          "contra": "123",
+          "rol": "Técnico"
+        }
+      }
+    ]
   },
   {
     "nombre": "Oliver",
@@ -53,7 +169,15 @@
     "dni": "14987550Z",
     "telf": "682034961",
     "contra": "hola",
-    "rol": "Cliente"
+    "rol": "Cliente",
+    "tecnicoAsig": {
+      "nombre": "Laura",
+      "apellido": "Gomez",
+      "dni": "33511561D",
+      "telf": "603498562",
+      "contra": "123",
+      "rol": "Técnico"
+    }
   },
   {
     "nombre": "Laura",
@@ -61,7 +185,41 @@
     "dni": "33511561D",
     "telf": "603498562",
     "contra": "123",
-    "rol": "Técnico"
+    "rol": "Técnico",
+    "clientesAsignados": [
+    	{
+		    "nombre": "Oliver",
+		    "apellido": "Reyes",
+		    "dni": "14987550Z",
+		    "telf": "682034961",
+		    "contra": "hola",
+		    "rol": "Cliente",
+		    "tecnicoAsig": {
+		      "nombre": "Laura",
+		      "apellido": "Gomez",
+		      "dni": "33511561D",
+		      "telf": "603498562",
+		      "contra": "123",
+		      "rol": "Técnico"
+		    }
+		 },
+		 {
+		    "nombre": "Jesus",
+		    "apellido": "Sanchez",
+		    "dni": "33805160J",
+		    "telf": "603547982",
+		    "contra": "hola",
+		    "rol": "Cliente",
+		    "tecnicoAsig": {
+		      "nombre": "Laura",
+		      "apellido": "Gomez",
+		      "dni": "33511561D",
+		      "telf": "603498562",
+		      "contra": "123",
+		      "rol": "Técnico"
+		    }
+		 }
+    ]
   },
   {
     "nombre": "Alfonso",
@@ -72,27 +230,157 @@
     "rol": "Agricultor"
   },
   {
-    "nombre": "lol",
-    "apellido": "lol",
-    "dni": "11111111h",
-    "telf": "444444444",
-    "contra": "1",
-    "rol": "Cliente"
+    "nombre": "Alejandro",
+    "apellido": "Castro",
+    "dni": "52615242M",
+    "telf": "621015478",
+    "contra": "hola",
+    "rol": "Cliente",
+    "tecnicoAsig": {
+      "nombre": "Antonio",
+      "apellido": "Ortiz",
+      "dni": "77281963P",
+      "telf": "658103575",
+      "contra": "123",
+      "rol": "Técnico"
+    }
   },
   {
-    "nombre": "p",
-    "apellido": "p",
-    "dni": "12345678z",
-    "telf": "777777777",
-    "contra": "p",
-    "rol": "Agricultor"
+    "nombre": "Ramon",
+    "apellido": "Valdes",
+    "dni": "40004231D",
+    "telf": "602387415",
+    "contra": "123",
+    "rol": "Técnico",
+    "clientesAsignados": [
+    	{
+		    "nombre": "Andrea",
+		    "apellido": "Lopez",
+		    "dni": "65541981P",
+		    "telf": "603489506",
+		    "contra": "hola",
+		    "rol": "Cliente",
+		    "tecnicoAsig": {
+		      "nombre": "Ramon",
+		      "apellido": "Valdes",
+		      "dni": "40004231D",
+		      "telf": "602387415",
+		      "contra": "123",
+		      "rol": "Técnico"
+		    }
+		  },
+		  {
+		    "nombre": "Juan",
+		    "apellido": "Torres",
+		    "dni": "02949495K",
+		    "telf": "683540521",
+		    "contra": "hola",
+		    "rol": "Cliente",
+		    "tecnicoAsig": {
+		      "nombre": "Ramon",
+		      "apellido": "Valdes",
+		      "dni": "40004231D",
+		      "telf": "602387415",
+		      "contra": "123",
+		      "rol": "Técnico"
+		    }
+		  }
+    ]
   },
   {
-    "nombre": "q",
-    "apellido": "q",
-    "dni": "67299862E",
-    "telf": "888888888",
-    "contra": "q",
-    "rol": "Técnico"
+    "nombre": "Marta",
+    "apellido": "Gonzalez",
+    "dni": "92872682Q",
+    "telf": "684201503",
+    "contra": "hola",
+    "rol": "Cliente",
+    "tecnicoAsig": {
+      "nombre": "Antonio",
+      "apellido": "Ortiz",
+      "dni": "77281963P",
+      "telf": "658103575",
+      "contra": "123",
+      "rol": "Técnico"
+    }
+  },
+  {
+    "nombre": "Andrea",
+    "apellido": "Lopez",
+    "dni": "65541981P",
+    "telf": "603489506",
+    "contra": "hola",
+    "rol": "Cliente",
+    "tecnicoAsig": {
+      "nombre": "Ramon",
+      "apellido": "Valdes",
+      "dni": "40004231D",
+      "telf": "602387415",
+      "contra": "123",
+      "rol": "Técnico"
+    }
+  },
+  {
+    "nombre": "Juan",
+    "apellido": "Torres",
+    "dni": "02949495K",
+    "telf": "683540521",
+    "contra": "hola",
+    "rol": "Cliente",
+    "tecnicoAsig": {
+      "nombre": "Ramon",
+      "apellido": "Valdes",
+      "dni": "40004231D",
+      "telf": "602387415",
+      "contra": "123",
+      "rol": "Técnico"
+    }
+  },
+  {
+    "nombre": "Laura",
+    "apellido": "Sanchez",
+    "dni": "19006166R",
+    "telf": "698456218",
+    "contra": "hola",
+    "rol": "Cliente",
+    "tecnicoAsig": {
+      "nombre": "Antonio",
+      "apellido": "Ortiz",
+      "dni": "77281963P",
+      "telf": "658103575",
+      "contra": "123",
+      "rol": "Técnico"
+    }
+  },
+  {
+    "nombre": "Carlos",
+    "apellido": "Rodrigez",
+    "dni": "82258505V",
+    "telf": "629529515",
+    "contra": "hola",
+    "rol": "Cliente",
+    "tecnicoAsig": {
+      "nombre": "Luis",
+      "apellido": "Peralta",
+      "dni": "61166669D",
+      "telf": "603541289",
+      "contra": "123",
+      "rol": "Técnico"
+    }
+  },
+  {
+    "nombre": "Alejandro",
+    "apellido": "Ramirez",
+    "dni": "01063373Z",
+    "telf": "605828068",
+    "contra": "hola",
+    "rol": "Cliente",
+    "tecnicoAsig": {
+      "nombre": "Antonio",
+      "apellido": "Ortiz",
+      "dni": "77281963P",
+      "telf": "658103575",
+      "contra": "123",
+      "rol": "Técnico"
+    }
   }
 ]

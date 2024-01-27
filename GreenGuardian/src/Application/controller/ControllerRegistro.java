@@ -5,7 +5,10 @@ import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -90,6 +93,8 @@ public class ControllerRegistro implements Initializable{
     void registrarUsuario(ActionEvent event) {
     	ArrayList<Usuario> listaUsuarios = leerJson();
     	
+    	List<Usuario> listaTecnicos = listaUsuarios.stream().filter(usuario -> usuario.getRol().equals("Técnico")).collect(Collectors.toList());
+    	
     	//Creo el usuario
     	
     	String nombre;
@@ -108,7 +113,7 @@ public class ControllerRegistro implements Initializable{
     	contra = txtIntroContr.getText();
     	repeatContra = txtReintroContr.getText();
     	selectedRole = rolesComboBox.getValue();
-    	Usuario u = new Usuario(nombre, apellido, dni, telf, contra,selectedRole);
+    	
     	// Validación del nombre
         if (nombre.isEmpty() || !nombre.matches("[a-zA-Z ]+")) {
             Alert alert = new Alert(AlertType.WARNING);
@@ -185,14 +190,37 @@ public class ControllerRegistro implements Initializable{
 
         
     	
-    	//Creo lista y leo Json
+    	if(selectedRole.equals("Cliente")) {
+    		Random random = new Random();
+    	    Usuario tecnicoAsignado = listaTecnicos.get(random.nextInt(listaTecnicos.size()));
+    	    
+    	    Usuario u = new Usuario(nombre, apellido, dni, telf, contra, selectedRole, tecnicoAsignado);
+    	    
+    	    //TODO: Hay que revisar el error de esta linea
+    	    //tecnicoAsignado.agregarClienteAsignado(u);
+    	    
+    	    listaUsuarios.add(u);
+    	    
+    	    escribirJson(listaUsuarios);
+    	}else if(selectedRole.equals("Técnico")) {
+    		Usuario u = new Usuario(nombre, apellido, dni, telf, contra, selectedRole, new ArrayList<>());
+    		// Añadir el técnico a la lista de usuarios
+    	    listaUsuarios.add(u);
+    	    
+    	    // Añadir lista de usuarios al Json
+    	    escribirJson(listaUsuarios);
+    	}else{
+    		Usuario u = new Usuario(nombre, apellido, dni, telf, contra,selectedRole);
+    		
+    		//Añado el usuario al la lista
+        	listaUsuarios.add(u);
+        	
+        	//Añado lista de usuarios al Json
+        	
+        	escribirJson(listaUsuarios);
+    	}
     	
-    	//Añado el usuario al la lista
-    	listaUsuarios.add(u);
     	
-    	//Añado lista de usuarios al Json
-    	
-    	escribirJson(listaUsuarios);
     	
     	//Cerrar Ventana Registro y abrir Inicio
     	try {
