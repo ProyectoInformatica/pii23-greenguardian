@@ -2,11 +2,14 @@ package Application.controller;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import Application.db.Connection;
 import Application.model.Session;
 import Application.model.Usuario;
 import javafx.event.ActionEvent;
@@ -73,7 +76,7 @@ public class Controller{
 		}
     }
     
-	private ArrayList<Usuario> leerJson() {
+	/*private ArrayList<Usuario> leerJson() {
 		Gson g = new Gson();
 		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 		try (FileReader r = new FileReader("Data/Usuarios.json")){
@@ -87,8 +90,46 @@ public class Controller{
 			e.printStackTrace();
 		}
 		return listaUsuarios;
-	} 
+	}*/
+	
+	private ArrayList<Usuario> leerBBDD(){
+		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+        Connection bbdd = new Connection("SQLite/PRUEBA.db");
 
+        try {
+            // Consulta para obtener los usuarios
+            String sql = "SELECT * FROM USUARIOS";
+            bbdd.sentenciaSQL(sql);
+
+            ResultSet rs = bbdd.executeQuery(sql);
+
+            // Procesar los resultados y agregar usuarios a la lista
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String dni = rs.getString("dni");
+                String telf = rs.getString("telefono");
+                String contra = rs.getString("contra");
+                String rol = rs.getString("rol");
+
+                // Crear objeto Usuario y agregarlo a la lista
+                Usuario usuario = new Usuario(nombre, apellido, dni, telf, contra, rol);
+                listaUsuarios.add(usuario);
+            }
+
+            rs.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                bbdd.closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return listaUsuarios;
+	}
     @FXML
     void iniciarSesión(ActionEvent event) {
     	String dni;
@@ -99,18 +140,21 @@ public class Controller{
     	contra = txtContra.getText();
     	
     	//Creo lista y leo Json
-    	ArrayList<Usuario> listaUsuarios = leerJson();
+    	ArrayList<Usuario> listaUsuarios = leerBBDD();
     	
-    		for (int i = 0; i < listaUsuarios.size(); i++) {
-        		Usuario u1 = listaUsuarios.get(i);
-    			Usuario u = new Usuario(dni, contra, dni, dni, contra,contra);
+    		for (Usuario usuario : listaUsuarios) {
+        		//Usuario u1 = listaUsuarios.get(i);
+    			//Usuario u = new Usuario(dni, contra, dni, dni, contra,contra);
     			
-    			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra()) & u1.getRol().equals("Cliente")) {
-    				nombre = u1.getNombre();
-    				Session.setUsuarioActual(u1);
-    				esCorrecto = true;
+    			if (usuario.getDni().equals(dni) && usuario.getContra().equals(contra)) {
+                    nombre = usuario.getNombre();
+                    Session.setUsuarioActual(usuario);
+                    esCorrecto = true;
     				
-    				 
+                    if(usuario.getDni().equals(dni) & usuario.getContra().equals(contra) & usuario.getRol().equals("Cliente")) {
+        				nombre = usuario.getNombre();
+        				Session.setUsuarioActual(usuario);
+        				esCorrecto = true; 
     				
     	        	//Cerrar InicioSesion y abrir ventana principal(Provisional hasta añadir los roles)
     	        	try {
@@ -133,11 +177,12 @@ public class Controller{
     	    			e.printStackTrace();
     	    		}
     	        	
+    	        	
     			}	
     			
-    			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())& u1.getRol().equals("Agricultor")) {
-    				nombre = u1.getNombre();
-    				Session.setUsuarioActual(u1);
+    			if(usuario.getDni().equals(dni) & usuario.getContra().equals(contra)& usuario.getRol().equals("Agricultor")) {
+    				nombre = usuario.getNombre();
+    				Session.setUsuarioActual(usuario);
     				esCorrecto = true;
     				
     				 
@@ -166,9 +211,9 @@ public class Controller{
     	        	
     			}
     			
-    			if(u1.getDni().equals(u.getDni()) & u1.getContra().equals(u.getContra())& u1.getRol().equals("Técnico")) {
-    				nombre = u1.getNombre();
-    				Session.setUsuarioActual(u1);
+    			if(usuario.getDni().equals(dni) & usuario.getContra().equals(contra)& usuario.getRol().equals("Técnico")) {
+    				nombre = usuario.getNombre();
+    				Session.setUsuarioActual(usuario);
     				esCorrecto = true;
     				
     				 
@@ -195,7 +240,8 @@ public class Controller{
     	    		}
     	        	
     			}
-		}
+    			}
+    		}
     		//Si los datos son incorrectos salta una alerta y vacia lo que has escrito
     	if(!esCorrecto) {
     		
@@ -210,7 +256,6 @@ public class Controller{
 
     	}  	
     	
-    }  
 
-
+    }
 }
