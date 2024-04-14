@@ -1,20 +1,11 @@
 package Application.controller;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.lang.reflect.Type;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import Application.model.Usuario;
+import Application.db.Connection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -62,6 +53,8 @@ public class ControllerRegistro implements Initializable{
     @FXML
     private ComboBox<String> rolesComboBox;
     
+    Connection bbdd = new Connection("SQLite/PRUEBA.db");
+    
 	//Cerrar registro y abrir ventana login
     @FXML
     void cerrarRegsitro(ActionEvent event) {
@@ -91,9 +84,6 @@ public class ControllerRegistro implements Initializable{
   //Registrar usuario
     @FXML
     void registrarUsuario(ActionEvent event) {
-    	ArrayList<Usuario> listaUsuarios = leerJson();
-    	
-    	List<Usuario> listaTecnicos = listaUsuarios.stream().filter(usuario -> usuario.getRol().equals("Técnico")).collect(Collectors.toList());
     	
     	//Creo el usuario
     	
@@ -133,14 +123,6 @@ public class ControllerRegistro implements Initializable{
             return; // Detiene la ejecución si la validación del apellido falla
         }
         // Validación del DNI
-        /*if (!dni.matches("\\d{8}[A-Za-z]")) { // 8 dígitos seguidos de una letra
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Advertencia");
-            alert.setHeaderText(null);
-            alert.setContentText("El DNI debe contener 8 dígitos seguidos de una letra.");
-            alert.showAndWait();
-            return; // Detiene la ejecución si la validación del DNI falla
-        }*/
         if(!validarNIF(dni)) {
         		Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Advertencia");
@@ -152,7 +134,8 @@ public class ControllerRegistro implements Initializable{
         	
 
         	    // Verificación de DNI duplicado
-        	    if (listaUsuarios.stream().anyMatch(usuario -> usuario.getDni().equals(dni))) {
+        		//TODO : Hacer la validación con la BBDD
+        	/*    if (listaUsuarios.stream().anyMatch(usuario -> usuario.getDni().equals(dni))) {
         	        // Mostrar un mensaje de error
         	        Alert alert = new Alert(AlertType.ERROR);
         	        alert.setTitle("Error de Registro");
@@ -160,7 +143,7 @@ public class ControllerRegistro implements Initializable{
         	        alert.setContentText("Ya existe un usuario con este DNI.");
         	        alert.showAndWait();
         	        return;
-        	    }
+        	    }*/
         // Validación del Teléfono
         if (!telf.matches("\\d{9}")) { // Exactamente 9 dígitos
             Alert alert = new Alert(AlertType.WARNING);
@@ -191,50 +174,19 @@ public class ControllerRegistro implements Initializable{
         
     	
     	if(selectedRole.equals("Cliente")) {
-    		Random random = new Random();
-    	    Usuario tecnicoAsignado = listaTecnicos.get(random.nextInt(listaTecnicos.size()));
-    	    Usuario tecnicoAsignadoDos = listaTecnicos.get(random.nextInt(listaTecnicos.size()));
     	    
-    	    Usuario u = new Usuario(nombre, apellido, dni, telf, contra, selectedRole, tecnicoAsignado, tecnicoAsignadoDos);
+    	    insertarUsuario(nombre, apellido, dni, telf, contra, selectedRole);
     	    
-    	    //TODO: Hay que revisar el error de esta linea
-    	    //tecnicoAsignado.agregarClienteAsignado(u);
-    	    
-    	    listaUsuarios.add(u);
-    	    
-    	    escribirJson(listaUsuarios);
     	}else if(selectedRole.equals("Técnico")) {
-    		Usuario u = new Usuario(nombre, apellido, dni, telf, contra, selectedRole, new ArrayList<>());
-    		// Añadir el técnico a la lista de usuarios
-    	    listaUsuarios.add(u);
-    	    
-    	    // Añadir lista de usuarios al Json
-    	    escribirJson(listaUsuarios);
-    	}else if(selectedRole.equals("Agricultor")) {
-    		Random random = new Random();
-    	    Usuario tecnicoAsignado = listaTecnicos.get(random.nextInt(listaTecnicos.size()));
-    	    Usuario tecnicoAsignadoDos = listaTecnicos.get(random.nextInt(listaTecnicos.size()));
-    	    
-    	    Usuario u = new Usuario(nombre, apellido, dni, telf, contra, selectedRole, tecnicoAsignado, tecnicoAsignadoDos);
-    	    
-    	    //TODO: Hay que revisar el error de esta linea
-    	    //tecnicoAsignado.agregarClienteAsignado(u);
-    	    
-    	    listaUsuarios.add(u);
-    	    // Añadir lista de usuarios al Json
-    	    escribirJson(listaUsuarios);
-    	}else{
-    		Usuario u = new Usuario(nombre, apellido, dni, telf, contra,selectedRole);
     		
-    		//Añado el usuario al la lista
-        	listaUsuarios.add(u);
-        	
-        	//Añado lista de usuarios al Json
-        	
-        	escribirJson(listaUsuarios);
-    	}
-    	
-    	
+    		insertarUsuario(nombre, apellido, dni, telf, contra, selectedRole);
+    		
+    	}else if(selectedRole.equals("Agricultor")) {
+    		
+    	    
+    	    insertarUsuario(nombre, apellido, dni, telf, contra, selectedRole);
+    	   
+    	}   	
     	
     	//Cerrar Ventana Registro y abrir Inicio
     	try {
@@ -311,33 +263,6 @@ public class ControllerRegistro implements Initializable{
  	        event.consume(); 
  	    }
  	}
- 	
- 	
- 	private void escribirJson(ArrayList<Usuario> listaUsuarios) {
-		Gson g = new GsonBuilder().setPrettyPrinting().create();
-		
-		try(FileWriter w = new FileWriter("Data/Usuarios.json")){
-			g.toJson(listaUsuarios,w);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private ArrayList<Usuario> leerJson() {
-		Gson g = new Gson();
-		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-		try (FileReader r = new FileReader("Data/Usuarios.json")){
-			Type lista = new TypeToken<ArrayList<Usuario>>() {}.getType();
-			listaUsuarios = g.fromJson(r, lista);
-			
-			if(listaUsuarios == null) {
-				listaUsuarios = new ArrayList<>();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return listaUsuarios;
-	}
 	
     public boolean validarNIF(String dni) {
         dni = dni.toUpperCase();
@@ -386,6 +311,25 @@ public class ControllerRegistro implements Initializable{
         }
         return true;
 }
+    
+    private void insertarUsuario(String nombre, String apellido, String dni, String telf, String contra,
+            String selectedRole) {
+    	
+        // Preparar la consulta SQL
+        String sql = "INSERT INTO USUARIOS (NOMBRE, APELLIDO, DNI, TELEFONO, CONTRA, ROL) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = bbdd.prepareStatement(sql)) {
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, apellido);
+            pstmt.setString(3, dni);
+            pstmt.setString(4, telf);
+            pstmt.setString(5, contra);
+            pstmt.setString(6, selectedRole);
+            pstmt.executeUpdate(); 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

@@ -2,11 +2,15 @@ package Application.controller;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import com.google.gson.Gson;
 
+import Application.db.Connection;
 import Application.model.RegistroFeedback;
 import Application.model.Session;
 import Application.model.Usuario;
@@ -20,7 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -48,7 +52,9 @@ public class ControllerVAgricultor {
     @FXML
     private Button LogOutSob;
 
-    private boolean riegoAutomaticoActivo = false; 
+    private boolean riegoAutomaticoActivo = false;
+    
+    Connection bbdd = new Connection("SQLite/PRUEBA.db");
     
 	Usuario usuarioActual = Session.getUsuarioActual();
 
@@ -128,23 +134,38 @@ public class ControllerVAgricultor {
     
     @FXML
     void abrirVentanaContactAgri(ActionEvent event) {
-    	try {
-    		Node source = (Node) event.getSource();
-	    	Stage stage = (Stage) source.getScene().getWindow();    
-	    	stage.close();
-    		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/VentanaContactTecnicoAgri.fxml"));
-    		ControllerVentanaContactTecAgri control = new ControllerVentanaContactTecAgri();
-        	loader1.setController(control);
-			Parent root1 = loader1.load();
-			Stage stage1 = new Stage();
-			stage1.setScene(new Scene(root1));
-			stage1.initModality(Modality.WINDOW_MODAL);
-			stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
-			stage1.show();
-			control.setLabelNombre(usuarioActual.getTecnicoAsignado().getNombre(), usuarioActual.getTecnicoAsignado().getApellido());	
-			control.setLabelTelf(usuarioActual.getTecnicoAsignado().getTelf());
-			
-		} catch (IOException e) {
+    	
+    	String consulta = "SELECT NOMBRE, APELLIDO, TELEFONO FROM USUARIOS u INNER JOIN AGRICULTORES_TECNICOS at ON u.ID =at.ID_TECNICO WHERE at.ID_AGRICULTOR = ?";
+    	try (PreparedStatement statement = bbdd.prepareStatement(consulta)){
+    		statement.setInt(1, usuarioActual.getId());
+    	    ResultSet resultado = statement.executeQuery();
+    	    
+    	    if (resultado.next()) {
+	    		Node source = (Node) event.getSource();
+		    	Stage stage = (Stage) source.getScene().getWindow();    
+		    	stage.close();
+	    		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/VentanaContactTecnicoAgri.fxml"));
+	    		ControllerVentanaContactTecAgri control = new ControllerVentanaContactTecAgri();
+	        	loader1.setController(control);
+				Parent root1 = loader1.load();
+				Stage stage1 = new Stage();
+				stage1.setScene(new Scene(root1));
+				stage1.initModality(Modality.WINDOW_MODAL);
+				stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+				control.setConnection(bbdd);
+    	        control.setLabelNombre(resultado.getString("NOMBRE"), resultado.getString("APELLIDO"));
+    	        control.setLabelTelf(resultado.getString("TELEFONO"));
+				stage1.show();
+				
+    	    }else {
+    	        //System.out.println("No se encontró ningún técnico asignado para el cliente actual.");
+    	    	Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Advertencia");
+                alert.setHeaderText(null);
+                alert.setContentText("No existen técnicos asociados al agricultor");
+                alert.showAndWait();
+    	    }
+		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
     }

@@ -1,13 +1,8 @@
 package Application.controller;
-import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import Application.db.Connection;
 import Application.model.Session;
@@ -75,22 +70,6 @@ public class Controller{
 			e.printStackTrace();
 		}
     }
-    
-	/*private ArrayList<Usuario> leerJson() {
-		Gson g = new Gson();
-		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-		try (FileReader r = new FileReader("Data/Usuarios.json")){
-			Type lista = new TypeToken<ArrayList<Usuario>>() {}.getType();
-			listaUsuarios = g.fromJson(r, lista);
-			
-			if(listaUsuarios == null) {
-				listaUsuarios = new ArrayList<>();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return listaUsuarios;
-	}*/
 	
 	private ArrayList<Usuario> leerBBDD(){
 		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
@@ -105,6 +84,7 @@ public class Controller{
 
             // Procesar los resultados y agregar usuarios a la lista
             while (rs.next()) {
+            	int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String dni = rs.getString("dni");
@@ -113,7 +93,7 @@ public class Controller{
                 String rol = rs.getString("rol");
 
                 // Crear objeto Usuario y agregarlo a la lista
-                Usuario usuario = new Usuario(nombre, apellido, dni, telf, contra, rol);
+                Usuario usuario = new Usuario(id,nombre, apellido, dni, telf, contra, rol);
                 listaUsuarios.add(usuario);
             }
 
@@ -143,8 +123,6 @@ public class Controller{
     	ArrayList<Usuario> listaUsuarios = leerBBDD();
     	
     		for (Usuario usuario : listaUsuarios) {
-        		//Usuario u1 = listaUsuarios.get(i);
-    			//Usuario u = new Usuario(dni, contra, dni, dni, contra,contra);
     			
     			if (usuario.getDni().equals(dni) && usuario.getContra().equals(contra)) {
                     nombre = usuario.getNombre();

@@ -2,6 +2,7 @@ package Application.controller;
 
 import java.io.IOException;
 
+import Application.db.Connection;
 import Application.model.Session;
 import Application.model.Usuario;
 import javafx.event.ActionEvent;
@@ -24,9 +25,16 @@ public class ControllerVentanaContactTecAgri {
 
     @FXML
     private Button btnVolverAgri;
+    
+    private Connection bbdd ;
 
     
     Usuario usuarioActual = Session.getUsuarioActual();
+    
+    public void setConnection(Connection connection) {
+		this.bbdd = connection;
+		
+	}
 
     @FXML
     void volverMenuAgri(ActionEvent event) {
@@ -52,12 +60,13 @@ public class ControllerVentanaContactTecAgri {
     	
     }
     public void setLabelNombre(String nombre, String apellido) {
-        lblNombreAgri.setText("Nombre Técnico Asignado 1: " + nombre + " " + apellido);
+        lblNombreAgri.setText("Nombre Técnico Asignado: " + nombre + " " + apellido);
     }
 
 
 	public void setLabelTelf(String telf) {
-		lblTelefonoAgri.setText("Teléfono 1: "+telf);
+		lblTelefonoAgri.setText("Teléfono: "+telf);
 		
 	}
+	
 }

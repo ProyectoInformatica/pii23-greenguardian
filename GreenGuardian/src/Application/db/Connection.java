@@ -15,6 +15,12 @@ public class Connection {
 	
 	public Connection(String path) {
 		BBDDName = path;
+		try {
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection("jdbc:sqlite:" + BBDDName);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
 	}
 	
 	public boolean sentenciaSQL(String sql) {
@@ -32,27 +38,9 @@ public class Connection {
 		return true;
 	}
 	
-	public boolean sentenciaSQL_param(String sql, String nombre, String apellido, String dni, String telf,
-			String contra, String rol, int id_user_asing) {
-		try {
-			Class.forName("org.sqlite.JDBC");
-	        conn = DriverManager.getConnection("jdbc:sqlite:"+BBDDName);
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, nombre);
-	        pstmt.setString(2, apellido);
-	        pstmt.setString(3, dni);
-	        pstmt.setString(4, telf);
-	        pstmt.setString(5, contra);
-	        pstmt.setString(6, rol);
-	        pstmt.setInt(7, id_user_asing);
-	        pstmt.executeUpdate();
-	        conn.close();
-		} catch ( Exception e ) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			return false;
-		}
-		return true;
-	}
+	public PreparedStatement prepareStatement(String sql) throws SQLException {
+        return conn.prepareStatement(sql);
+    }
 	
 	public void closeConnection() throws SQLException {
         if (conn != null) {
@@ -65,10 +53,10 @@ public class Connection {
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:" + BBDDName);
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql); // Ejecutar la consulta y obtener el ResultSet
+            rs = stmt.executeQuery(sql);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         return rs;
-    }
+    }	
 }

@@ -1,11 +1,16 @@
 package Application.controller;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
+import Application.db.Connection;
 import Application.model.Session;
 import Application.model.Usuario;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +44,8 @@ public class ControllerListClientesTecnico {
     @FXML
     private Button btnVolver;
     
+    Connection bbdd = new Connection("SQLite/PRUEBA.db");
+    
     Usuario usuarioActual = Session.getUsuarioActual();
 
     @FXML
@@ -49,7 +56,7 @@ public class ControllerListClientesTecnico {
         ColTelf.setCellValueFactory(new PropertyValueFactory<>("telf"));
 
         if (usuarioActual != null && usuarioActual.getRol().equals("Técnico")) {
-            List<Usuario> clientesAsignados = usuarioActual.getClientesAsignados();
+            List<Usuario> clientesAsignados = obtenerClientesAsignados(usuarioActual.getId());
 
             if (clientesAsignados != null) {
                 tblClientes.setItems(FXCollections.observableArrayList(clientesAsignados));
@@ -92,5 +99,36 @@ public class ControllerListClientesTecnico {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    private List<Usuario> obtenerClientesAsignados(int idTecnico) {
+        // Consulta SQL para obtener los IDs de los clientes asignados al técnico
+        String sql = "SELECT u.* " +
+                     "FROM CLIENTES_TECNICOS ct " +
+                     "JOIN USUARIOS u ON ct.ID_CLIENTE = u.ID " +
+                     "WHERE ct.ID_TECNICO = ?";
+
+        try (PreparedStatement pstmt = bbdd.prepareStatement(sql)) {
+            pstmt.setInt(1, idTecnico);
+            ResultSet rs = pstmt.executeQuery();
+
+            ObservableList<Usuario> clientes = FXCollections.observableArrayList();
+
+            while (rs.next()) {
+                String nombre = rs.getString("NOMBRE");
+                String apellido = rs.getString("APELLIDO");
+                String dni = rs.getString("DNI");
+                String telefono = rs.getString("TELEFONO");
+
+                Usuario cliente = new Usuario(nombre, apellido, dni, telefono);
+                clientes.add(cliente);
+            }
+
+            return clientes;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
