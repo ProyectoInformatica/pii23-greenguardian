@@ -55,10 +55,11 @@ public class ControllerHumedad {
         ArrayList<Sensor> sensores = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-        String sql = "SELECT DNI_USER, TIPO_SENSOR, FECHA, DATO FROM SENSORES WHERE TIPO_SENSOR = 'Humedad'";
-        try (PreparedStatement pstmt = bbdd.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-
+        String sql = "SELECT DNI_USER, TIPO_SENSOR, FECHA, DATO FROM SENSORES WHERE TIPO_SENSOR = 'Humedad' AND DNI_USER = ?";
+        try (PreparedStatement pstmt = bbdd.prepareStatement(sql)  		
+             ) {  	
+        	pstmt.setString(1, usuarioActual.getDni());
+        	ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 String id = rs.getString("DNI_USER");
                 String tipoSensor = rs.getString("TIPO_SENSOR");
