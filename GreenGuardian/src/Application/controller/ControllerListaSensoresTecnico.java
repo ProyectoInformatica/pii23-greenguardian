@@ -3,6 +3,10 @@ package Application.controller;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +22,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
+import Application.db.Connection;
 import Application.model.Sensor;
 import Application.model.Session;
 import Application.model.Usuario;
@@ -55,9 +60,11 @@ public class ControllerListaSensoresTecnico {
     @FXML
     private Button btnVolver;
     
+    Connection bbdd = new Connection("SQLite/PRUEBA.db");
+    
     Usuario usuarioActual = Session.getUsuarioActual();
     
-    ArrayList<Sensor> listSen = leerJson();
+    //ArrayList<Sensor> listSen = leerJson();
     
     @FXML
     void initialize() {
@@ -68,9 +75,9 @@ public class ControllerListaSensoresTecnico {
         ColDato.setCellValueFactory(new PropertyValueFactory<>("dato"));
      
         if (usuarioActual != null && usuarioActual.getRol().equals("Técnico")) {
-            List<Usuario> clientesAsignados = usuarioActual.getClientesAsignados();
-
-            if (clientesAsignados != null) {
+            //List<Usuario> clientesAsignados = usuarioActual.getClientesAsignados();
+        	List<Sensor> sensores = obtenerDatosSensor(usuarioActual.getId());
+            /*if (clientesAsignados != null) {
                 // Filtrar los sensores por los clientes asignados al técnico
                 ArrayList<Sensor> sensoresFiltrados = new ArrayList<>();
                 for (Sensor sensor : listSen) {
@@ -80,20 +87,54 @@ public class ControllerListaSensoresTecnico {
                             break; // No necesitamos seguir verificando otros clientes
                         }
                     }
-                }
+                }*/
 
-                tblSensores.setItems(FXCollections.observableArrayList(sensoresFiltrados));
-            } else {
+                tblSensores.setItems(FXCollections.observableArrayList(sensores));
+            }/* else {
                 // Si el técnico no tiene clientes asignados, mostrar un mensaje o hacer algo según tus necesidades
             	mostrarAlerta("Información", "El técnico no tiene clientes asignados.");
-            }
-        } else {
+            }*/
+         else {
             // Manejar el caso en que no se pueda obtener la información del técnico
         	mostrarAlerta("Error", "No se pudo obtener la información del técnico.");
         }
     }
     
-    private void mostrarAlerta(String titulo, String mensaje) {
+    private List<Sensor> obtenerDatosSensor(int idTecnico) {
+		String sql = "SELECT s.* FROM CLIENTES_TECNICOS ct JOIN USUARIOS u ON ct.ID_CLIENTE = u.ID LEFT JOIN SENSORES s ON u.DNI = s.DNI_USER WHERE ct.ID_TECNICO = ?";
+		
+		try (PreparedStatement pstmt = bbdd.prepareStatement(sql)) {
+            pstmt.setInt(1, idTecnico);
+            ResultSet rs = pstmt.executeQuery();
+
+            List<Sensor> sensores = new ArrayList<>();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            while (rs.next()) {
+            	String id = rs.getString("DNI_USER");
+                String tipoSensor = rs.getString("TIPO_SENSOR");
+                String fechaStr = rs.getString("FECHA");
+                Date fecha = null;
+                try {
+                    fecha = dateFormat.parse(fechaStr);
+                } catch (ParseException e) {
+                    System.err.println("Error al parsear la fecha: " + fechaStr);
+                    continue;
+                }
+                int dato = rs.getInt("DATO");
+
+                Sensor sensor = new Sensor(id,tipoSensor, fecha, dato);
+                sensores.add(sensor);
+            }
+
+            return sensores;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+	}
+
+	private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
         alert.setHeaderText(null);
@@ -124,7 +165,7 @@ public class ControllerListaSensoresTecnico {
 		}
     }
     
-    private ArrayList<Sensor> leerJson() {
+    /*private ArrayList<Sensor> leerJson() {
     	GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -152,5 +193,5 @@ public class ControllerListaSensoresTecnico {
 			e.printStackTrace();
 		}
 		return listasSensor;
-	}
+	}*/
 }
