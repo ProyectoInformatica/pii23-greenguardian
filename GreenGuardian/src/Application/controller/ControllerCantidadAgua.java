@@ -1,8 +1,9 @@
 package Application.controller;
-import java.io.FileReader;
+
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.text.DateFormat;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,14 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
-
+import Application.db.Connection;
 import Application.model.Sensor;
 import Application.model.Session;
 import Application.model.Usuario;
@@ -36,124 +30,107 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 public class ControllerCantidadAgua {
-	
 
-	    @FXML
-	    private BarChart<String, Number> MostrarCantidadAgua;
+    @FXML
+    private BarChart<String, Number> MostrarCantidadAgua;
 
-	    @FXML
-	    private Button btnActualizar;
-	    
-	    @FXML
-	    private ComboBox<Date> cmbFechas;
+    @FXML
+    private Button btnActualizar;
 
-	    @FXML
-	    private Button VolverMenuPrin;
-	    
-	    Usuario usuarioActual = Session.getUsuarioActual();
-	    
-	    ArrayList<Sensor> listSensores = leerJson();
-	    ArrayList<Sensor> listaSenAguaUser = rellenarListaSensorUser();
-	        
-	        ArrayList<Sensor> rellenarListaSensorUser() {
-	        	ArrayList<Sensor> result = new ArrayList<>();
-	        	for (int i = 0; i < listSensores.size(); i++) {
-	        		Sensor s = listSensores.get(i);
-					if(s.getId().equals(usuarioActual.getDni())& s.getTipoSensor().equals("Agua")) {
-						result.add(s);
-						
-					}
-				}
-				return result;
-	        }
+    @FXML
+    private ComboBox<Date> cmbFechas;
 
-	    @FXML
-	    void MostrarCantidadAgua(ActionEvent event) {
-            double AguaActual = obtenerAgua();
+    @FXML
+    private Button VolverMenuPrin;
 
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.getData().add(new XYChart.Data<>("Cantidad de agua", AguaActual));
+    Usuario usuarioActual = Session.getUsuarioActual();
 
-            MostrarCantidadAgua.getData().clear();
-            MostrarCantidadAgua.getData().add(series);
-        }
-	    
-	    @FXML
-        void initialize() {
-            List<Date> fechas = obtenerFechasDesdeSensores(listaSenAguaUser);
+    Connection bbdd = new Connection("SQLite/PRUEBA.db");
 
-            ObservableList<Date> fechasObservable = FXCollections.observableArrayList(fechas);
-            cmbFechas.setItems(fechasObservable);
-        }
+    ArrayList<Sensor> listaSenAguaUser = leerDesdeDB();
 
-        private List<Date> obtenerFechasDesdeSensores(ArrayList<Sensor> sensores) {
-            return sensores.stream().map(Sensor::getFecha).collect(Collectors.toList());
-        }
-        
-    	@FXML
-        private double obtenerAgua() {
-    		Date fechaSeleccionada = cmbFechas.getValue();
-            
-            // Buscar el sensor correspondiente
-            Optional<Sensor> sensorOptional = listaSenAguaUser.stream().filter(sensor -> sensor.getFecha().equals(fechaSeleccionada))
-                    .findFirst();
+    private ArrayList<Sensor> leerDesdeDB() {
+        ArrayList<Sensor> sensores = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-            return sensorOptional.map(Sensor::getDato).orElse(0);
-        }
+        String sql = "SELECT DNI_USER, TIPO_SENSOR, FECHA, DATO FROM SENSORES WHERE TIPO_SENSOR = 'Agua'";
+        try (PreparedStatement pstmt = bbdd.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
 
-    	
-    	
-@FXML
-	void irMenuPrincipal(ActionEvent event) {
-    	try {
-    		Node source = (Node) event.getSource();
-	    	Stage stage = (Stage) source.getScene().getWindow();    
-	    	stage.close();
-    		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/menuPrincipal.fxml"));
-    		ControllerVentanaPrincipal control = new ControllerVentanaPrincipal();
-        	loader1.setController(control);
-			Parent root1 = loader1.load();
-			Stage stage1 = new Stage();
-			stage1.setScene(new Scene(root1));
-			stage1.initModality(Modality.WINDOW_MODAL);
-			stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
-			stage1.show();
-			control.setLabelText(usuarioActual.getNombre());
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-}
+            while (rs.next()) {
+                String id = rs.getString("DNI_USER");
+                String tipoSensor = rs.getString("TIPO_SENSOR");
+                String fechaStr = rs.getString("FECHA");
+                Date fecha = null;
+                try {
+                    fecha = dateFormat.parse(fechaStr);
+                } catch (ParseException e) {
+                    System.err.println("Error al parsear la fecha: " + fechaStr);
+                    continue;
+                }
+                int dato = rs.getInt("DATO");
 
-private ArrayList<Sensor> leerJson() {
-	GsonBuilder gsonBuilder = new GsonBuilder();
-    gsonBuilder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
-        @Override
-        public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            try {
-                return df.parse(json.getAsString());
-            } catch (ParseException e) {
-                throw new JsonParseException(e);
+                Sensor sensor = new Sensor(id, tipoSensor, fecha, dato);
+                sensores.add(sensor);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
-    });
 
-    Gson g = gsonBuilder.create();
-	ArrayList<Sensor> listasSensor = new ArrayList<>();
-	try (FileReader r = new FileReader("Data/Sensores.json")){
-		Type lista = new TypeToken<ArrayList<Sensor>>() {}.getType();
-		listasSensor = g.fromJson(r, lista);
-		
-		if(listasSensor == null) {
-			listasSensor = new ArrayList<>();
-		}
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	return listasSensor;
-}
+        return sensores;
+    }
 
+    @FXML
+    void MostrarCantidadAgua(ActionEvent event) {
+        double aguaActual = obtenerAgua();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.getData().add(new XYChart.Data<>("Cantidad de agua", aguaActual));
+
+        MostrarCantidadAgua.getData().clear();
+        MostrarCantidadAgua.getData().add(series);
+    }
+
+    @FXML
+    void initialize() {
+        List<Date> fechas = obtenerFechasDesdeSensores(listaSenAguaUser);
+        ObservableList<Date> fechasObservable = FXCollections.observableArrayList(fechas);
+        cmbFechas.setItems(fechasObservable);
+    }
+
+    private List<Date> obtenerFechasDesdeSensores(ArrayList<Sensor> sensores) {
+        return sensores.stream().map(Sensor::getFecha).collect(Collectors.toList());
+    }
+
+    private double obtenerAgua() {
+        Date fechaSeleccionada = cmbFechas.getValue();
+        Optional<Sensor> sensorOptional = listaSenAguaUser.stream()
+            .filter(sensor -> sensor.getFecha().equals(fechaSeleccionada))
+            .findFirst();
+        return sensorOptional.map(Sensor::getDato).orElse(0);
+    }
+
+    @FXML
+    void irMenuPrincipal(ActionEvent event) {
+        try {
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Application/view/menuPrincipal.fxml"));
+            ControllerVentanaPrincipal control = new ControllerVentanaPrincipal();
+            loader.setController(control);
+            Parent root = loader.load();
+            Stage stage1 = new Stage();
+            stage1.setScene(new Scene(root));
+            stage1.initModality(Modality.WINDOW_MODAL);
+            stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+            stage1.show();
+            control.setLabelText(usuarioActual.getNombre());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

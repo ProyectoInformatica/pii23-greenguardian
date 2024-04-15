@@ -1,8 +1,9 @@
 package Application.controller;
-import java.io.FileReader;
+
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.text.DateFormat;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,14 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
-
+import Application.db.Connection; // Asegúrate de que esta importación corresponda a tu estructura de proyecto
 import Application.model.Sensor;
 import Application.model.Session;
 import Application.model.Usuario;
@@ -30,128 +24,114 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
+
 public class ControllerHumedad {
 
-        @FXML
-        private BarChart<String, Number> MostrarHumedad;
+    @FXML
+    private BarChart<String, Number> MostrarHumedad;
 
-        @FXML
-        private Button btnActualizar;
-        
-        @FXML
-        private ComboBox<Date> cmbFechas;
+    @FXML
+    private Button btnActualizar;
 
-        @FXML
-        private Button VolverMenuPrin;
-        
-        Usuario usuarioActual = Session.getUsuarioActual();
-        
-       ArrayList<Sensor> listSensores = leerJson();
-       ArrayList<Sensor> listaSenHumUser = rellenarListaSensorUser();
-        
-        ArrayList<Sensor> rellenarListaSensorUser() {
-        	ArrayList<Sensor> result = new ArrayList<>();
-        	for (int i = 0; i < listSensores.size(); i++) {
-        		Sensor s = listSensores.get(i);
-				if(s.getId().equals(usuarioActual.getDni())& s.getTipoSensor().equals("Humedad")) {
-					result.add(s);
-					
-				}
-			}
-			return result;
-        }
+    @FXML
+    private ComboBox<Date> cmbFechas;
 
-        @FXML
-        void MostrarHumedad(ActionEvent event) {
-                double HumedadActual = obtenerHumedad();
+    @FXML
+    private Button VolverMenuPrin;
 
-                XYChart.Series<String, Number> series = new XYChart.Series<>();
-                series.getData().add(new XYChart.Data<>("Humedad", HumedadActual));
+    Usuario usuarioActual = Session.getUsuarioActual();
 
-                MostrarHumedad.getData().clear();
-                MostrarHumedad.getData().add(series);
+    Connection bbdd = new Connection("SQLite/PRUEBA.db");
+
+    ArrayList<Sensor> listaSenHumUser = leerDesdeDB();
+
+    private ArrayList<Sensor> leerDesdeDB() {
+        ArrayList<Sensor> sensores = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        String sql = "SELECT DNI_USER, TIPO_SENSOR, FECHA, DATO FROM SENSORES WHERE TIPO_SENSOR = 'Humedad'";
+        try (PreparedStatement pstmt = bbdd.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                String id = rs.getString("DNI_USER");
+                String tipoSensor = rs.getString("TIPO_SENSOR");
+                String fechaStr = rs.getString("FECHA");
+                Date fecha = null;
+                try {
+                    fecha = dateFormat.parse(fechaStr);
+                } catch (ParseException e) {
+                    System.err.println("Error al parsear la fecha: " + fechaStr);
+                    continue;
+                }
+                int dato = rs.getInt("DATO");
+
+                Sensor sensor = new Sensor(id, tipoSensor, fecha, dato);
+                sensores.add(sensor);
             }
-        
-        @FXML
-        void initialize() {
-            List<Date> fechas = obtenerFechasDesdeSensores(listaSenHumUser);
-
-            ObservableList<Date> fechasObservable = FXCollections.observableArrayList(fechas);
-            cmbFechas.setItems(fechasObservable);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
 
-        private List<Date> obtenerFechasDesdeSensores(ArrayList<Sensor> sensores) {
-            return sensores.stream().map(Sensor::getFecha).collect(Collectors.toList());
-        }
-        	@FXML
-            private double obtenerHumedad() {
-        		Date fechaSeleccionada = cmbFechas.getValue();
-                
-                // Buscar el sensor correspondiente
-                Optional<Sensor> sensorOptional = listaSenHumUser.stream().filter(sensor -> sensor.getFecha().equals(fechaSeleccionada))
-                        .findFirst();
+        return sensores;
+    }
 
-                return sensorOptional.map(Sensor::getDato).orElse(0);
-            }
+    @FXML
+    void MostrarHumedad(ActionEvent event) {
+        double humedadActual = obtenerHumedad();
 
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.getData().add(new XYChart.Data<>("Humedad", humedadActual));
+
+        MostrarHumedad.getData().clear();
+        MostrarHumedad.getData().add(series);
+    }
+
+    @FXML
+    void initialize() {
+        List<Date> fechas = obtenerFechasDesdeSensores(listaSenHumUser);
+        ObservableList<Date> fechasObservable = FXCollections.observableArrayList(fechas);
+        cmbFechas.setItems(fechasObservable);
+    }
+
+    private List<Date> obtenerFechasDesdeSensores(ArrayList<Sensor> sensores) {
+        return sensores.stream().map(Sensor::getFecha).collect(Collectors.toList());
+    }
+
+    private double obtenerHumedad() {
+        Date fechaSeleccionada = cmbFechas.getValue();
+        Optional<Sensor> sensorOptional = listaSenHumUser.stream()
+            .filter(sensor -> sensor.getFecha().equals(fechaSeleccionada))
+            .findFirst();
+        return sensorOptional.map(Sensor::getDato).orElse(0);
+    }
 
     @FXML
     void irMenuPrincipal(ActionEvent event) {
-	    	try {
-	    		Node source = (Node) event.getSource();
-		    	Stage stage = (Stage) source.getScene().getWindow();    
-		    	stage.close();
-	    		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/menuPrincipal.fxml"));
-	    		ControllerVentanaPrincipal control = new ControllerVentanaPrincipal();
-	        	loader1.setController(control);
-				Parent root1 = loader1.load();
-				Stage stage1 = new Stage();
-				stage1.setScene(new Scene(root1));
-				stage1.initModality(Modality.WINDOW_MODAL);
-				stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
-				stage1.show();
-				control.setLabelText(usuarioActual.getNombre());
-					  
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+        try {
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Application/view/menuPrincipal.fxml"));
+            ControllerVentanaPrincipal control = new ControllerVentanaPrincipal();
+            loader.setController(control);
+            Parent root = loader.load();
+            Stage stage1 = new Stage();
+            stage1.setScene(new Scene(root));
+            stage1.initModality(Modality.WINDOW_MODAL);
+            stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
+            stage1.show();
+            control.setLabelText(usuarioActual.getNombre());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    
-    private ArrayList<Sensor> leerJson() {
-    	GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
-            @Override
-            public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                try {
-                    return df.parse(json.getAsString());
-                } catch (ParseException e) {
-                    throw new JsonParseException(e);
-                }
-            }
-        });
-
-        Gson g = gsonBuilder.create();
-		ArrayList<Sensor> listasSensor = new ArrayList<>();
-		try (FileReader r = new FileReader("Data/Sensores.json")){
-			Type lista = new TypeToken<ArrayList<Sensor>>() {}.getType();
-			listasSensor = g.fromJson(r, lista);
-			
-			if(listasSensor == null) {
-				listasSensor = new ArrayList<>();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return listasSensor;
-	}
-
 }
+
