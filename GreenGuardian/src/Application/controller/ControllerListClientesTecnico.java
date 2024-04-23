@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import Application.db.Connection;
+import Application.db.DatabaseConnection;
 import Application.model.Session;
 import Application.model.Usuario;
 import javafx.collections.FXCollections;
@@ -44,7 +44,7 @@ public class ControllerListClientesTecnico {
     @FXML
     private Button btnVolver;
     
-    Connection bbdd = new Connection("SQLite/PRUEBA.db");
+    DatabaseConnection bbdd = new DatabaseConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an","piigreenguardian");
     
     Usuario usuarioActual = Session.getUsuarioActual();
 
@@ -129,6 +129,12 @@ public class ControllerListClientesTecnico {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }finally {
+            try {
+                bbdd.closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

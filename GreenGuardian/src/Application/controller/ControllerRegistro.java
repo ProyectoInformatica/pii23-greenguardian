@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import Application.db.Connection;
+import Application.db.DatabaseConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,7 +53,7 @@ public class ControllerRegistro implements Initializable{
     @FXML
     private ComboBox<String> rolesComboBox;
     
-    Connection bbdd = new Connection("SQLite/PRUEBA.db");
+    DatabaseConnection bbdd = new DatabaseConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an","piigreenguardian");
     
 	//Cerrar registro y abrir ventana login
     @FXML
@@ -328,6 +328,12 @@ public class ControllerRegistro implements Initializable{
             pstmt.executeUpdate(); 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                bbdd.closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

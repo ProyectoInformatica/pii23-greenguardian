@@ -14,5 +14,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="gson-2.8.6.jar"/>
 	<classpathentry kind="lib" path="sqlite-jdbc-3.25.2.jar"/>
+	<classpathentry kind="lib" path="mariadb-java-client-2.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

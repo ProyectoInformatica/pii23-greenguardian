@@ -6,36 +6,40 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Connection {
+public class DatabaseConnection {
 	String BBDDName;
+	String url;
+    String user;
+    String password;
 	java.sql.Connection conn = null;
 	Statement stmt = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	public Connection(String path) {
-		BBDDName = path;
+	public DatabaseConnection(String url, String user, String password, String BBDDName) {
+		this.url = url;
+        this.user = user;
+        this.password = password;
+        this.BBDDName = BBDDName;
 		try {
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:" + BBDDName);
+            Class.forName("org.mariadb.jdbc.Driver");
+            conn = DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-	}
+	}  
 	
 	public boolean sentenciaSQL(String sql) {
 		try {
-			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:"+BBDDName);
-			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);
-			stmt.close();
-			conn.close();
-		} catch ( Exception e ) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			return false;
-		}
-		return true;
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+            //conn.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            return false;
+        }
+        return true;
 	}
 	
 	public PreparedStatement prepareStatement(String sql) throws SQLException {
@@ -50,9 +54,7 @@ public class Connection {
 	
 	public ResultSet executeQuery(String sql) throws SQLException {
         try {
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:" + BBDDName);
-            stmt = conn.createStatement();
+        	stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

@@ -22,7 +22,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
-import Application.db.Connection;
+import Application.db.DatabaseConnection;
 import Application.model.Sensor;
 import Application.model.Session;
 import Application.model.Usuario;
@@ -60,7 +60,7 @@ public class ControllerListaSensoresTecnico {
     @FXML
     private Button btnVolver;
     
-    Connection bbdd = new Connection("SQLite/PRUEBA.db");
+    DatabaseConnection bbdd = new DatabaseConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an","piigreenguardian");
     
     Usuario usuarioActual = Session.getUsuarioActual();
     
@@ -108,7 +108,7 @@ public class ControllerListaSensoresTecnico {
             ResultSet rs = pstmt.executeQuery();
 
             List<Sensor> sensores = new ArrayList<>();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             while (rs.next()) {
             	String id = rs.getString("DNI_USER");
                 String tipoSensor = rs.getString("TIPO_SENSOR");
@@ -131,6 +131,12 @@ public class ControllerListaSensoresTecnico {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }finally {
+            try {
+                bbdd.closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 	}
 

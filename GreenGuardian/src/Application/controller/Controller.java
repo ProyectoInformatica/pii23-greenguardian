@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Application.db.Connection;
+import Application.db.DatabaseConnection;
 import Application.model.Session;
 import Application.model.Usuario;
 import javafx.event.ActionEvent;
@@ -73,7 +73,7 @@ public class Controller{
 	
 	private ArrayList<Usuario> leerBBDD(){
 		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-        Connection bbdd = new Connection("SQLite/PRUEBA.db");
+        DatabaseConnection bbdd = new DatabaseConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an","piigreenguardian");
 
         try {
             // Consulta para obtener los usuarios

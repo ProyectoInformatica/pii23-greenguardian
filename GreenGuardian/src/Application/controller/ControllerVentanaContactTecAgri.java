@@ -2,7 +2,7 @@ package Application.controller;
 
 import java.io.IOException;
 
-import Application.db.Connection;
+import Application.db.DatabaseConnection;
 import Application.model.Session;
 import Application.model.Usuario;
 import javafx.event.ActionEvent;
@@ -26,12 +26,12 @@ public class ControllerVentanaContactTecAgri {
     @FXML
     private Button btnVolverAgri;
     
-    private Connection bbdd ;
+    private DatabaseConnection bbdd ;
 
     
     Usuario usuarioActual = Session.getUsuarioActual();
     
-    public void setConnection(Connection connection) {
+    public void setConnection(DatabaseConnection connection) {
 		this.bbdd = connection;
 		
 	}

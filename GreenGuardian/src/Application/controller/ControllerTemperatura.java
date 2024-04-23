@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import Application.db.Connection;
+import Application.db.DatabaseConnection;
 import Application.model.Sensor;
 import Application.model.Session;
 import Application.model.Usuario;
@@ -47,16 +47,16 @@ public class ControllerTemperatura {
 
     Usuario usuarioActual = Session.getUsuarioActual();
 
-    Connection bbdd = new Connection("SQLite/PRUEBA.db");
+    DatabaseConnection bbdd = new DatabaseConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an","piigreenguardian");
 
     ArrayList<Sensor> listaSenTempUser = leerDesdeDB();
 
     private ArrayList<Sensor> leerDesdeDB() {
         ArrayList<Sensor> sensores = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         String sql = "SELECT DNI_USER, TIPO_SENSOR, FECHA, DATO FROM SENSORES WHERE TIPO_SENSOR = 'Temperatura' AND DNI_USER = ?";
-        try (PreparedStatement pstmt = bbdd.prepareStatement(sql)  		
+        try (PreparedStatement pstmt = bbdd.prepareStatement(sql)
              ) {  	
         	pstmt.setString(1, usuarioActual.getDni());
         	ResultSet rs = pstmt.executeQuery();
@@ -79,6 +79,12 @@ public class ControllerTemperatura {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }finally {
+            try {
+                bbdd.closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return sensores;

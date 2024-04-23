@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 import com.google.gson.Gson;
 
-import Application.db.Connection;
+import Application.db.DatabaseConnection;
 import Application.model.RegistroFeedback;
 import Application.model.Session;
 import Application.model.Usuario;
@@ -54,7 +54,7 @@ public class ControllerVAgricultor {
 
     private boolean riegoAutomaticoActivo = false;
     
-    Connection bbdd = new Connection("SQLite/PRUEBA.db");
+    DatabaseConnection bbdd = new DatabaseConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an","piigreenguardian");
     
 	Usuario usuarioActual = Session.getUsuarioActual();
 
@@ -167,7 +167,13 @@ public class ControllerVAgricultor {
     	    }
 		} catch (IOException | SQLException e) {
 			e.printStackTrace();
-		}
+		}finally {
+            try {
+                bbdd.closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
