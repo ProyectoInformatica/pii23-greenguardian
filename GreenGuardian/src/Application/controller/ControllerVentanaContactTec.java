@@ -92,9 +92,7 @@ public class ControllerVentanaContactTec {
            	    if (resultado.next()) {
            	    	
            	    	int idRec = resultado.getInt("ID_TECNICO");
-           	    	//Node source = (Node) event.getSource();
-      	            //Stage stage = (Stage) source.getScene().getWindow();
-      	            //stage.close();
+           	    	DatabaseConnection newBbdd = new DatabaseConnection("jdbc:mariadb://195.235.211.197/piigreenguardian", "piigreenguardian", "gr33nguard1an", "piigreenguardian");
            	        FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/Chat.fxml"));
            	        ControllerChat control = new ControllerChat();
            	        loader1.setController(control);
@@ -103,7 +101,7 @@ public class ControllerVentanaContactTec {
            	        stage1.setScene(new Scene(root1));
            	        stage1.initModality(Modality.WINDOW_MODAL);
            	        stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());   
-           	        //control.setConnection(bbdd);
+           	        control.setConnection(newBbdd);
            	        control.setId(idRec);
            	        stage1.setOnCloseRequest(e -> control.close());
            	        stage1.show();

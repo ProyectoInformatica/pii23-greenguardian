@@ -24,7 +24,7 @@ public class ControllerChat {
     private TextField msg;
     
     
-    private DatabaseConnection bbdd = new DatabaseConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an","piigreenguardian");
+    private DatabaseConnection bbdd;// = new DatabaseConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an","piigreenguardian");
     private int idRec;
     private boolean connectionSet = false;
     private boolean idSet = false;
@@ -32,6 +32,10 @@ public class ControllerChat {
     
     
     Usuario usuarioActual = Session.getUsuarioActual();
+    
+    public void setConnection(DatabaseConnection connection) {
+        this.bbdd = connection;
+    }
     
     public void setId(int idRec2) throws SQLException {
     	this.idRec = idRec2;
