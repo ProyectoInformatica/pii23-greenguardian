@@ -43,6 +43,8 @@ public class Controller{
     private PasswordField txtContra;
     
     public String nombre;
+    
+    private DatabaseConnection bbdd ;
     @FXML
     void abrirPantalla(MouseEvent event) {
     	
@@ -104,6 +106,7 @@ public class Controller{
         } finally {
             try {
                 bbdd.closeConnection();
+                //System.out.println("Base de datos cerrada despues de leer");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -134,7 +137,7 @@ public class Controller{
         				Session.setUsuarioActual(usuario);
         				esCorrecto = true; 
     				
-    	        	//Cerrar InicioSesion y abrir ventana principal(Provisional hasta añadir los roles)
+    	        	
     	        	try {
     	        		Node source = (Node) event.getSource();
     	            	Stage stage = (Stage) source.getScene().getWindow();    
@@ -235,5 +238,16 @@ public class Controller{
     	}  	
     	
 
+    }
+    
+    public void close() {
+        try {
+            if (bbdd != null) {
+                bbdd.closeConnection();
+                //System.out.println("Conexión a la base de datos cerrada en ControllerVentanaPrincipal");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

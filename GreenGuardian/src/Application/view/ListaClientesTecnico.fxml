@@ -31,6 +31,19 @@
                         <TableColumn fx:id="ColTelf" minWidth="0.0" prefWidth="140.0" text="Telefono" />
                     </columns>
                   </TableView>
+                  <Button fx:id="btnChat" mnemonicParsing="false" onAction="#abrirChat" text="Chat" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="botones" />
+                        <String fx:value="bordes" />
+                     </styleClass>
+                     <stylesheets>
+                        <URL value="@Botones.css" />
+                        <URL value="@Bordes.css" />
+                     </stylesheets>
+                  </Button>
                </children>
             </HBox>
             <HBox alignment="CENTER">

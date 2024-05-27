@@ -2,9 +2,11 @@ package Application.controller;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import com.google.gson.Gson;
 
+import Application.db.DatabaseConnection;
 import Application.model.RegistroFeedback;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,6 +42,8 @@ public class ControllerVTecnico {
 	    
 	    private boolean reiniciarSensor = false;
 	    
+	    private DatabaseConnection bbdd = new DatabaseConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an","piigreenguardian");
+	    
 	    
 	    public void setLabelText(String text) {
 	        lblNomVT.setText("Bienvenid@ "+text);
@@ -65,7 +69,14 @@ public class ControllerVTecnico {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}finally {
+	            try {
+	                bbdd.closeConnection();
+	                //System.out.println("Base de datos cerrada despues de cerrar sesion");
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
 	    }
 	    
 	    
@@ -149,6 +160,13 @@ public class ControllerVTecnico {
 				
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}finally {
+	            try {
+	                bbdd.closeConnection();
+	                //System.out.println("Base de datos cerrada despues al abrir verClientes");
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
 	    }
 }

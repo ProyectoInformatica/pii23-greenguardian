@@ -84,7 +84,14 @@ public class ControllerVentanaPrincipal {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}finally {
+	            try {
+	                bbdd.closeConnection();
+	                //System.out.println("Base de datos cerrada despues de cerrar sesión");
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
 	    }
 	 @FXML
 	 void abrirVentanaTemperatura(ActionEvent event) {
@@ -248,7 +255,7 @@ public class ControllerVentanaPrincipal {
 	            	        stage1.initModality(Modality.WINDOW_MODAL);
 	            	        stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());
 	            	     // Pasar los datos del técnico asignado al controlador de la ventana de contacto
-	            	        control.setConnection(bbdd);
+	            	        //control.setConnection(bbdd);
 	            	        control.setLabelNombre(resultado.getString("NOMBRE"), resultado.getString("APELLIDO"));
 	            	        control.setLabelTelf(resultado.getString("TELEFONO"));
 	            	        stage1.show();
@@ -266,10 +273,22 @@ public class ControllerVentanaPrincipal {
 	         }finally {
 	             try {
 	                 bbdd.closeConnection();
+	                 //System.out.println("Base de datos cerrada despues de abrir ventanaContact");
 	             } catch (SQLException e) {
 	                 e.printStackTrace();
 	             }
 	         }
+	    }
+	    
+	    public void close() {
+	        try {
+	            if (bbdd != null) {
+	                bbdd.closeConnection();
+	                //System.out.println("Conexión a la base de datos cerrada en ControllerVentanaPrincipal");
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 	    }
 	 
 	 }

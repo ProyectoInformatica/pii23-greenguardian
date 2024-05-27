@@ -21,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -40,6 +41,9 @@ public class ControllerListClientesTecnico {
 
     @FXML
     private TableColumn<Usuario, String> ColTelf;
+    
+    @FXML
+    private Button btnChat;
 
     @FXML
     private Button btnVolver;
@@ -77,6 +81,59 @@ public class ControllerListClientesTecnico {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+    
+    @FXML
+    void abrirChat(ActionEvent event) {
+    	Usuario clienteSeleccionado = tblClientes.getSelectionModel().getSelectedItem();
+        if (clienteSeleccionado != null) {
+        	//System.out.println("Cliente selecionado");
+        	try {
+          		 if (bbdd == null|| bbdd.conn == null || bbdd.conn.isClosed()) {
+                       System.err.println("Error: La conexión a la base de datos es nula.");
+                       return;
+                   }
+                   
+                   String consulta = "SELECT ID FROM USUARIOS WHERE DNI = ?";
+
+                   try (PreparedStatement statement = bbdd.prepareStatement(consulta)) {
+                  	 statement.setString(1, clienteSeleccionado.getDni());
+                  	    ResultSet resultado = statement.executeQuery();
+
+                  	    
+                  	    if (resultado.next()) {
+                  	    	
+                  	    	int idRec = resultado.getInt("ID");
+                  	    	//Node source = (Node) event.getSource();
+             	            //Stage stage = (Stage) source.getScene().getWindow();
+             	            //stage.close();
+                  	        FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Application/view/Chat.fxml"));
+                  	        ControllerChat control = new ControllerChat();
+                  	        loader1.setController(control);
+                  	        Parent root1 = loader1.load();
+                  	        Stage stage1 = new Stage();
+                  	        stage1.setScene(new Scene(root1));
+                  	        stage1.initModality(Modality.WINDOW_MODAL);
+                  	        stage1.initOwner(((Node) (event.getSource())).getScene().getWindow());   
+                  	        control.setId(idRec);
+                  	        stage1.setOnCloseRequest(e -> control.close());
+                  	        stage1.show();
+                  	    } else {
+                  	        //System.out.println("No se encontró ningún técnico asignado para el cliente actual.");
+                  	    	Alert alert = new Alert(AlertType.INFORMATION);
+                              alert.setTitle("Advertencia");
+                              alert.setHeaderText(null);
+                              alert.setContentText("No existen técnicos asociados al cliente");
+                              alert.showAndWait();
+                  	    }
+                   }
+               } catch (IOException | SQLException e) {
+                   e.printStackTrace();
+               }
+            
+        } else {
+        	mostrarAlerta("Error", "Debe seleccionar el cliente");
+        }
+    }
 
     @FXML
     void volverMenuPrincipal(ActionEvent event) {
@@ -98,7 +155,14 @@ public class ControllerListClientesTecnico {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}finally {
+            try {
+                bbdd.closeConnection();
+                //System.out.println("Base de datos cerrada al volver al menu principal");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
     private List<Usuario> obtenerClientesAsignados(int idTecnico) {
@@ -129,12 +193,6 @@ public class ControllerListClientesTecnico {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
-        }finally {
-            try {
-                bbdd.closeConnection();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

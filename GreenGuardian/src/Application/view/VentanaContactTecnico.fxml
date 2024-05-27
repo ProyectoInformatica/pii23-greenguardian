@@ -56,6 +56,19 @@
                         <String fx:value="bordes" />
                      </styleClass>
                   </Button>
+                  <Button fx:id="btnChat" mnemonicParsing="false" onAction="#abrirChat" prefHeight="31.0" prefWidth="99.0" text="Chat" textFill="WHITE">
+                     <stylesheets>
+                        <URL value="@Botones.css" />
+                        <URL value="@Bordes.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="botones" />
+                        <String fx:value="bordes" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </children>

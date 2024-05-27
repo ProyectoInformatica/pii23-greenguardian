@@ -1,5 +1,6 @@
 package Application.db;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ public class DatabaseConnection {
 	String url;
     String user;
     String password;
-	java.sql.Connection conn = null;
+	public java.sql.Connection conn = null;
 	Statement stmt = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -60,5 +61,103 @@ public class DatabaseConnection {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         return rs;
-    }	
+    }
+	
+	
+	
+	//METODOS PARA EL CHAT
+	public static String getMesseges(int id_e, int id_r){
+        String cadena = "";
+        Connection conn = null;
+        Statement stmt = null;
+        String sql;
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an");
+            System.out.println("Connectado a la Base de Datos...");
+
+            sql = "SELECT * FROM CHAT WHERE ID_REMITENTE= " + id_e + " AND ID_DESTINATARIO= " + id_r + " ORDER BY FECHA;";
+            System.out.println("sql Select: "+sql);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery( sql );
+            while(rs.next()){
+                cadena = cadena + rs.getString("TEXTO") + "\n";
+            }
+
+            rs.close();
+            stmt.close();
+
+            //STEP 6: Cerrando conexion.
+            conn.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        return cadena;
+    };
+	
+    public static String setMessege(int id_e, int id_r, String mensaje){
+        String cadena = "";
+        Connection conn = null;
+        Statement stmt = null;
+        String sql;
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mariadb://195.235.211.197/piigreenguardian","piigreenguardian","gr33nguard1an");
+            System.out.println("Connectado a la Base de Datos...");
+
+            sql = "INSERT INTO CHAT (ID_REMITENTE, ID_DESTINATARIO, TEXTO) values("+id_e+", "+id_r+", '" + mensaje + "');";
+            System.out.println("sql Insert: "+sql);
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+
+            //STEP 6: Cerrando conexion.
+            conn.close();
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        return cadena;
+    };
+	
+	
 }
